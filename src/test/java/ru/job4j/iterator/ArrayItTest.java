@@ -1,4 +1,3 @@
-/*
 package ru.job4j.iterator;
 
 import org.junit.jupiter.api.Test;
@@ -24,4 +23,4 @@ class ArrayItTest {
         assertThat(it.next()).isEqualTo(2);
         assertThat(it.next()).isEqualTo(3);
     }
-}*/
+}
