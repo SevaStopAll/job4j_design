@@ -15,19 +15,22 @@ class BoxTest {
     @Test
     void isThisCube() {
         Box box = new Box(8, 4);
-        assertThat(box.whatsThis()).isEqualTo("Cube");
+        String name = box.whatsThis();
+        assertThat(name).isEqualTo("Cube");
     }
 
     @Test
     void whenNumberOfVertices8() {
         Box box = new Box(8, 6);
-        assertThat(box.getNumberOfVertices()).isEqualTo(8);
+        int vertices = box.getNumberOfVertices();
+        assertThat(vertices).isEqualTo(8);
     }
 
     @Test
     void whenNumberOfVertices4() {
         Box box = new Box(4, 1);
-        assertThat(box.getNumberOfVertices()).isEqualTo(4);
+        int vertices = box.getNumberOfVertices();
+        assertThat(vertices).isEqualTo(4);
     }
 
     @Test
@@ -45,12 +48,14 @@ class BoxTest {
     @Test
     void whenAreaIs110dot8() {
         Box box = new Box(4, 8);
-        assertThat(box.getArea()).isCloseTo(110.8d, withPrecision(0.1d));
+        double area = box.getArea();
+        assertThat(area).isCloseTo(110.8d, withPrecision(0.1d));
     }
 
     @Test
     void whenAreaIs12dot56() {
         Box box = new Box(0, 1);
-        assertThat(box.getArea()).isCloseTo(12.56d, withinPercentage(0.1d));
+        double area = box.getArea();
+        assertThat(area).isCloseTo(12.56d, withinPercentage(0.1d));
     }
 }
