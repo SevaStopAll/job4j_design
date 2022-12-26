@@ -12,14 +12,14 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         this.container = (T[]) new Object[capacity];
     }
 
-    private T[] grow() {
-        return Arrays.copyOf(container, (container.length + 1) * 2);
+    private void grow() {
+        container = Arrays.copyOf(container, (container.length + 1) * 2);
     }
 
     @Override
     public void add(T value) {
         if (elements + 1 >= container.length) {
-            container = grow();
+            grow();
         }
         container[elements] = value;
         elements++;
@@ -28,16 +28,14 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, elements);
-        T element = container[index];
+        T element = get(index);
         container[index] = newValue;
         return element;
     }
 
     @Override
     public T remove(int index) {
-        Objects.checkIndex(index, elements);
-        T element = container[index];
+        T element = get(index);
         System.arraycopy(container, index + 1,
                 container, index,
                 size() - index - 1);
@@ -69,7 +67,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                return container[point] != null;
+                return point < elements;
             }
 
             @Override
