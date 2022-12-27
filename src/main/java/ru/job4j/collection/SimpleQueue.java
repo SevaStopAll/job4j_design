@@ -11,18 +11,15 @@ public class SimpleQueue<T> {
         if (inSize == 0) {
             throw new NoSuchElementException();
         }
-        while (inSize != 0) {
-            out.push(in.pop());
-            inSize--;
-            outSize++;
+        if (outSize == 0) {
+            while (inSize != 0) {
+                out.push(in.pop());
+                inSize--;
+                outSize++;
+            }
         }
         outSize--;
         T element = out.pop();
-        while (outSize != 0) {
-            in.push(out.pop());
-            inSize++;
-            outSize--;
-        }
         return element;
     }
     public void push(T value) {
