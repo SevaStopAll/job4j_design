@@ -1,4 +1,4 @@
-package ru.job4j.map;
+/** package ru.job4j.map;
 
 import java.util.Arrays;
 import java.util.ConcurrentModificationException;
@@ -22,11 +22,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean put(K key, V value) {
         boolean result = false;
-        if ((count++) >= (capacity * LOAD_FACTOR)) {
+        if ((count + 1) >= (capacity * LOAD_FACTOR)) {
             expand();
         }
         int index = indexFor(hash(key.hashCode()));
-        if (table[index] != null) {
+        if (table[index] == null) {
             table[index] = new MapEntry<>(key, value);
             count++;
             result = true;
@@ -49,7 +49,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public V get(K key) {
-        V result =null;
+        V result = null;
         for (MapEntry<K, V> entry : table) {
             if (key.hashCode() == entry.key.hashCode() && key.equals(entry.key)) {
                 result = entry.value;
@@ -79,11 +79,14 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<K> iterator() {
         int expectedModCount = modCount;
-        Iterator<K> iterator= new Iterator<>() {
+        Iterator<K> iterator = new Iterator<>() {
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
+                }
+                while (table[turn].key != null) {
+                    turn++;
                 }
                 return turn < table.length;
             }
@@ -109,3 +112,5 @@ public class SimpleMap<K, V> implements Map<K, V> {
         }
     }
 }
+ */
+
