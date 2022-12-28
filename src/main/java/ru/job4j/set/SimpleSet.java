@@ -24,6 +24,7 @@ public class SimpleSet<T> implements Set<T> {
         for (int i = 0; i < set.size(); i++) {
             if (Objects.equals(set.get(i), value)) {
                 result = true;
+                break;
             }
         }
         return result;
