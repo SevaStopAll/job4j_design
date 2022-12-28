@@ -29,7 +29,6 @@ public class SimpleSet {
         }
         return result;
     }
-
     private void grow() {
         container = Arrays.copyOf(container, container.length * 2);
     }
