@@ -1,4 +1,3 @@
-/**
 package ru.job4j.map;
 
 import java.util.Arrays;
@@ -26,13 +25,13 @@ public class SimpleMap<K, V> implements Map<K, V> {
         if ((count + 1) >= (capacity * LOAD_FACTOR)) {
             expand();
         }
-        int index = indexFor(hash(key.hashCode()));
+        int index = (key == null) ? 0 : indexFor(hash(key.hashCode()));
         if (table[index] == null) {
             table[index] = new MapEntry<>(key, value);
             count++;
+            modCount++;
             result = true;
         }
-        modCount++;
         return result;
     }
 
@@ -45,7 +44,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private void expand() {
-        table = Arrays.copyOf(table, (table.length + 1) * 2);
+
+        table = Arrays.copyOf(table, table.length * 2);
     }
 
     @Override
@@ -63,16 +63,18 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean remove(K key) {
         boolean result = false;
-        count--;
         for (MapEntry<K, V> entry : table) {
             int index = indexFor(hash(key.hashCode()));
-            if (key.hashCode() == entry.key.hashCode() && key.equals(entry.key)) {
+            if (table[index] != null
+                    && key.hashCode() == table[index].key.hashCode()
+                    && key.equals(table[index].key)) {
                 System.arraycopy(table, index + 1,
                         table, index,
                         table.length - index - 1);
-                table[count - 1] = null;
                 count--;
                 modCount++;
+                result = true;
+                break;
             }
         }
         return result;
@@ -81,6 +83,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<K> iterator() {
         int expectedModCount = modCount;
+        turn = 0;
         Iterator<K> iterator = new Iterator<>() {
             @Override
             public boolean hasNext() {
@@ -114,6 +117,6 @@ public class SimpleMap<K, V> implements Map<K, V> {
         }
     }
 }
-*/
+
 
 
