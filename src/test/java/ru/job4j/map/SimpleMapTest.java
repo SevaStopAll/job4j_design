@@ -31,6 +31,25 @@ class SimpleMapTest {
     }
 
     @Test
+    void whenCheckGet4Elements() {
+        assertThat(map.get(1)).isEqualTo("1");
+        assertThat(map.get(2)).isEqualTo("2");
+        assertThat(map.get(3)).isEqualTo("3");
+        assertThat(map.get(4)).isEqualTo("4");
+        assertThat(map.get(5)).isEqualTo(null);
+        assertThat(map).hasSize(4);
+    }
+
+    @Test
+    void whenCheckGetNull() {
+        assertThat(map.put(null, "12")).isTrue();
+        assertThat(map.get(2)).isEqualTo("2");
+        assertThat(map.get(3)).isEqualTo("3");
+        assertThat(map.get(4)).isEqualTo("4");
+        assertThat(map.get(5)).isEqualTo(null);
+        assertThat(map).hasSize(4);
+    }
+    @Test
     void whenCheckPut() {
         assertThat(map.put(0, "0")).isTrue();
         assertThat(map).hasSize(5);
@@ -41,6 +60,12 @@ class SimpleMapTest {
         assertThat(map).hasSize(5);
     }
 
+   @Test
+    void whenCheckPut1ElementIsFalse() {
+        assertThat(map.put(12, "12")).isFalse();
+        assertThat(map).hasSize(4);
+    }
+
     @Test
     void whenCheckRemove() {
         assertThat(map.remove(2)).isTrue();
@@ -49,6 +74,16 @@ class SimpleMapTest {
         assertThat(map).hasSize(3);
         assertThat(map.remove(5)).isFalse();
         assertThat(map).hasSize(3);
+    }
+
+    @Test
+    void whenCheckRemove2Elements() {
+        assertThat(map.remove(2)).isTrue();
+        assertThat(map).hasSize(3);
+        assertThat(map.remove(1)).isTrue();
+        assertThat(map).hasSize(2);
+        assertThat(map.remove(19)).isFalse();
+        assertThat(map).hasSize(2);
     }
 
     @Test
