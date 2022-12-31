@@ -47,7 +47,7 @@ class SimpleMapTest {
         assertThat(map.get(3)).isEqualTo("3");
         assertThat(map.get(4)).isEqualTo("4");
         assertThat(map.get(5)).isEqualTo(null);
-        assertThat(map).hasSize(4);
+        assertThat(map).hasSize(5);
     }
     @Test
     void whenCheckPut() {
