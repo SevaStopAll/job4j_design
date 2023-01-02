@@ -86,18 +86,18 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<K> iterator() {
         int expectedModCount = modCount;
-        final int[] itCount = {0};
         return new Iterator<>() {
+            int index = 0;
 
             @Override
             public boolean hasNext() {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                while (itCount[0] < table.length && table[itCount[0]] == null) {
-                    itCount[0]++;
+                while (index < table.length && table[index] == null) {
+                    index++;
                 }
-                return itCount[0] < table.length;
+                return index < table.length;
             }
 
             @Override
@@ -105,7 +105,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return table[itCount[0]++].key;
+                return table[index++].key;
             }
         };
     }
