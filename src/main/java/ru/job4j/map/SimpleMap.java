@@ -12,7 +12,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private int capacity = 8;
 
     private int count = 0;
-    private int itCount = 0;
+    /*private int itCount = 0;*/
 
     private int modCount = 0;
 
@@ -64,12 +64,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public V get(K key) {
         V result = null;
         int index = countIndex(key);
-        if (Objects.isNull(table[index])) {
-            result = null;
-        } else {
-            if (Objects.hashCode(table[index].key) == Objects.hashCode(key) && Objects.equals(table[index].key, key)) {
-                result = table[index].value;
-            }
+        if (!Objects.isNull(table[index]) && Objects.hashCode(table[index].key) == Objects.hashCode(key) && Objects.equals(table[index].key, key)) {
+            result = table[index].value;
         }
         return result;
     }
@@ -78,15 +74,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
     public boolean remove(K key) {
         boolean result = false;
         int index = countIndex(key);
-        if (Objects.isNull(table[index])) {
-            result = false;
-        } else {
-            if (Objects.hashCode(table[index].key) == Objects.hashCode(key) && Objects.equals(table[index].key, key)) {
-                table[index] = null;
-                result = true;
-                modCount++;
-                count--;
-            }
+        if (!Objects.isNull(table[index]) && Objects.hashCode(table[index].key) == Objects.hashCode(key) && Objects.equals(table[index].key, key)) {
+            table[index] = null;
+            result = true;
+            modCount++;
+            count--;
         }
         return result;
     }
@@ -94,7 +86,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<K> iterator() {
         int expectedModCount = modCount;
-        itCount = 0;
+        final int[] itCount = {0};
         return new Iterator<>() {
 
             @Override
@@ -102,10 +94,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                while (itCount < table.length && table[itCount] == null) {
-                    itCount++;
+                while (itCount[0] < table.length && table[itCount[0]] == null) {
+                    itCount[0]++;
                 }
-                return itCount < table.length;
+                return itCount[0] < table.length;
             }
 
             @Override
@@ -113,8 +105,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                K element = table[itCount++].key;
-                return element;
+                return table[itCount[0]++].key;
             }
         };
     }
