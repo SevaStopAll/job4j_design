@@ -3,6 +3,7 @@ package ru.job4j.map;
 import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 public class SimpleMap<K, V> implements Map<K, V> {
 
@@ -11,10 +12,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
     private int capacity = 8;
 
     private int count = 0;
+    private int itCount = 0;
 
     private int modCount = 0;
-    int iteration = 0;
-    int operations = 0;
+
 
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
@@ -24,7 +25,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
             expand();
         }
         boolean result = false;
-        int index = (key == null) ? 0 : indexFor(hash(key.hashCode()));
+        int index = countIndex(key);
         if (table[index] == null) {
             table[index] = new MapEntry<>(key, value);
             count++;
@@ -35,11 +36,15 @@ public class SimpleMap<K, V> implements Map<K, V> {
     }
 
     private int hash(int hashCode) {
-        return (hashCode == 0) ? 0 : hashCode ^ (hashCode >>> capacity);
+        return hashCode ^ (hashCode >>> 16);
     }
 
     private int indexFor(int hash) {
         return hash % capacity;
+    }
+
+    private int countIndex(K key) {
+        return (key == null) ? 0 : indexFor(hash(key.hashCode()));
     }
 
     private void expand() {
@@ -49,7 +54,8 @@ public class SimpleMap<K, V> implements Map<K, V> {
         count = 0;
         for (MapEntry<K, V> entry : tmp) {
             if (entry != null) {
-                put(entry.key, entry.value);
+                int index = countIndex(entry.key);
+                table[index] = entry;
             }
         }
     }
@@ -57,16 +63,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public V get(K key) {
         V result = null;
-        int index = (key == null) ? indexFor(0) : indexFor(hash(key.hashCode()));
-        if (key == null && table[0].key != null
-                || key != null && index == 0 &&  table[0].key == null) {
+        int index = countIndex(key);
+        if (Objects.isNull(table[index])) {
             result = null;
-        } else if (index == 0) {
-            result = table[0].value;
         } else {
-            if (table[index] != null
-                    && table[index].key.hashCode() == key.hashCode()
-                    && table[index].key.equals(key)) {
+            if (Objects.hashCode(table[index].key) == Objects.hashCode(key) && Objects.equals(table[index].key, key)) {
                 result = table[index].value;
             }
         }
@@ -76,16 +77,11 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public boolean remove(K key) {
         boolean result = false;
-        int index = (key == null) ? indexFor(0) : indexFor(hash(key.hashCode()));
-        if (index == 0) {
-            table[index] = null;
-            result = true;
-            modCount++;
-            count--;
-        } else if (table[index] == null) {
+        int index = countIndex(key);
+        if (Objects.isNull(table[index])) {
             result = false;
         } else {
-            if (table[index].key.hashCode() == key.hashCode() && table[index].key.equals(key)) {
+            if (Objects.hashCode(table[index].key) == Objects.hashCode(key) && Objects.equals(table[index].key, key)) {
                 table[index] = null;
                 result = true;
                 modCount++;
@@ -98,8 +94,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
     @Override
     public Iterator<K> iterator() {
         int expectedModCount = modCount;
-        iteration = 0;
-        operations = 0;
+        itCount = 0;
         return new Iterator<>() {
 
             @Override
@@ -107,10 +102,10 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (expectedModCount != modCount) {
                     throw new ConcurrentModificationException();
                 }
-                while (operations < count && table[iteration] == null) {
-                    iteration++;
+                while (itCount < table.length && table[itCount] == null) {
+                    itCount++;
                 }
-                return operations < count;
+                return itCount < table.length;
             }
 
             @Override
@@ -118,8 +113,7 @@ public class SimpleMap<K, V> implements Map<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                K element = table[iteration++].key;
-                operations++;
+                K element = table[itCount++].key;
                 return element;
             }
         };
