@@ -85,9 +85,9 @@ public class SimpleMap<K, V> implements Map<K, V> {
 
     @Override
     public Iterator<K> iterator() {
-        int expectedModCount = modCount;
         return new Iterator<>() {
             int index = 0;
+            int expectedModCount = modCount;
 
             @Override
             public boolean hasNext() {
