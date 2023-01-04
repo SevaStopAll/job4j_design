@@ -1,31 +1,23 @@
 package ru.job4j.question;
 
-import java.util.Set;
+import java.util.*;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 public class Analize {
 
     public static Info diff(Set<User> previous, Set<User> current) {
-        int added = 0;
-        int deleted = 0;
+        Map<Integer, String> users = previous.stream().collect(Collectors.toMap(User::getId, User::getName));
+        Predicate<User> add = e -> !previous.contains(e);
+        Predicate<User> delete = e -> !current.contains(e);
+        int deleted = previous.stream().filter(delete).toList().size();
+        int added = current.stream().filter(add).toList().size();
         int changed = 0;
         for (User user : current) {
-            for (User user2 : previous) {
-                if (user.getId() == user2.getId() && !user.getName().equals(user2.getName())) {
-                    changed++;
-                }
-            }
+            if (users.containsKey(user.getId()) && !users.containsValue(user.getName())) {
+                changed++;
         }
-        for (User user : previous) {
-            if (!current.contains(user)) {
-                deleted++;
-            }
-        }
-        for (User user : current) {
-            if (!previous.contains(user)) {
-                added++;
-            }
-        }
-        return new Info(added, changed, deleted);
     }
-
+        return new Info(added, changed, deleted);
 }
+    }
