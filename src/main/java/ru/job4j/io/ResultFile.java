@@ -1,6 +1,7 @@
 package ru.job4j.io;
 
 import java.io.FileOutputStream;
+import java.io.IOException;
 
 public class ResultFile {
     public static void main(String[] args) {
@@ -12,7 +13,7 @@ public class ResultFile {
                     }
                     out.write(System.lineSeparator().getBytes());
                 }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
