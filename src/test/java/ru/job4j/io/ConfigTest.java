@@ -4,7 +4,6 @@ import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.*;
 
 class ConfigTest {
-
     @Test
     void whenPairWithoutComment() {
         String path = "./data/pair_without_comment.properties";
