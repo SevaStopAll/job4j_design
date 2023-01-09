@@ -6,6 +6,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.StringJoiner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Config {
 
@@ -17,16 +19,23 @@ public class Config {
     }
 
     public void load() {
-        StringJoiner out = new StringJoiner(System.lineSeparator());
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            String[] val = read.readLine().split("=");
-            values.put(val[0], val[1]);
+            String target = read.readLine();
+            Pattern pattern = Pattern.compile("\\S=\\S");
+            Matcher match = pattern.matcher(target);
+            if (match.find()) {
+                String[] val = target.split("=", 2);
+                values.put(val[0], val[1]);
+            } else {
+                throw new IllegalArgumentException();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public String value(String key) {
+
         return values.get(key);
     }
 
