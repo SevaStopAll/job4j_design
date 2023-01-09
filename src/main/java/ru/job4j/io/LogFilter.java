@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.function.Predicate;
 
 public class LogFilter {
-    public List<String> filter(String file) {
+    public static List<String> filter(String file) {
         List<String> strings = new ArrayList<>();
         try (BufferedReader in = new BufferedReader(new FileReader(file))) {
             Predicate<String> pred = e -> e.matches("(.*) 404 (.*)");
@@ -17,9 +17,18 @@ public class LogFilter {
         return strings;
     }
 
+    public static void save(List<String> log, String file) {
+    try (PrintWriter out = new PrintWriter(
+            new BufferedOutputStream(
+                    new FileOutputStream(file)))) {
+        out.print(log);
+    } catch (IOException e) {
+        e.printStackTrace();
+    }
+    }
+
     public static void main(String[] args) {
-        LogFilter logFilter = new LogFilter();
-        List<String> log = logFilter.filter("log.txt");
-        log.forEach(System.out::println);
+        List<String> log = filter("log.txt");
+        save(log, "404.txt");
     }
 }
