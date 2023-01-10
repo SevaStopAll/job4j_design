@@ -33,4 +33,11 @@ class ConfigTest {
         config.load();
         assertThat(config.value("name")).isEqualTo("Vse=volod");
     }
+
+    @Test
+    void whenCommentWithEquals() {
+        String path = "./data/comment_with_equals.properties";
+        Config config = new Config(path);
+        assertThatThrownBy(config::load).isInstanceOf(IllegalArgumentException.class);
+    }
 }
