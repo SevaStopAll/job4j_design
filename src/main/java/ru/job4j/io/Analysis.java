@@ -18,7 +18,8 @@ public class Analysis {
                 if (!isWorking && (line.contains("300") || line.contains("200") || line.contains("100"))) {
                     isWorking = true;
                     String[] lines = line.split(" ");
-                    write.print(lines[1] + ";");
+                    write.print(lines[1]);
+                    write.append(";");
                     write.println();
                 }
             }
