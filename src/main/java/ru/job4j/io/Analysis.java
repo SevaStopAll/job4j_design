@@ -4,7 +4,7 @@ import java.io.*;
 
 
 public class Analysis {
-    public void unavailable(String source, String target) {
+    public  void unavailable(String source, String target) {
         boolean isWorking = true;
         try (BufferedReader read = new BufferedReader(new FileReader(source));
         PrintWriter write = new PrintWriter(target)) {
@@ -25,10 +25,5 @@ public class Analysis {
         } catch (IOException e) {
             e.printStackTrace();
         }
-    }
-
-    public static void main(String[] args) {
-        Analysis analysis = new Analysis();
-        analysis.unavailable("server.log", "target.csv");
     }
 }
