@@ -23,7 +23,7 @@ public class Config {
             String target = read.readLine();
             Pattern pattern = Pattern.compile("\\S=\\S");
             Matcher match = pattern.matcher(target);
-            if (match.find() && !target.contains("#")) {
+            if (!target.contains("#") && match.find()) {
                 String[] val = target.split("=", 2);
                 values.put(val[0], val[1]);
             } else {
