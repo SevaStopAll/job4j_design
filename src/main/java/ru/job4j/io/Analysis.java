@@ -1,27 +1,32 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 
 public class Analysis {
     public void unavailable(String source, String target) {
-        List<String> strings = new ArrayList<>();
+        boolean isWorking = true;
         try (BufferedReader read = new BufferedReader(new FileReader(source));
         PrintWriter write = new PrintWriter(target)) {
-            Predicate<String> pred = s -> s.contains("400") || s.contains("500");
-            strings = read.lines().filter(pred)
-                    .collect(Collectors.toList());
-            write.println(strings);
+            while (read.ready()) {
+                String line = read.readLine();
+                if (isWorking && (line.contains("400") || line.contains("500"))) {
+                    isWorking = false;
+                    String[] lines = line.split(" ");
+                    write.print(lines[1] + ";");
+                }
+                if (!isWorking && (line.contains("300") || line.contains("200") || line.contains("100"))) {
+                    isWorking = true;
+                    String[] lines = line.split(" ");
+                    write.print(lines[1] + ";");
+                    write.println();
+                }
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
+
     public static void main(String[] args) {
         Analysis analysis = new Analysis();
         analysis.unavailable("server.log", "target.csv");
