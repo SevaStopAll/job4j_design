@@ -13,12 +13,13 @@ public class Analysis {
                 if (isWorking && (line.contains("400") || line.contains("500"))) {
                     isWorking = false;
                     String[] lines = line.split(" ");
-                    write.print(lines[1] + ";");
+                    write.append(lines[1]);
+                    write.append(";");
                 }
                 if (!isWorking && (line.contains("300") || line.contains("200") || line.contains("100"))) {
                     isWorking = true;
                     String[] lines = line.split(" ");
-                    write.print(lines[1]);
+                    write.append(lines[1]);
                     write.append(";");
                     write.println();
                 }
