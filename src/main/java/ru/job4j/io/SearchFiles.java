@@ -8,11 +8,10 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 public class SearchFiles extends SimpleFileVisitor<Path> {
-    List<Path> found = new ArrayList<>();
-    Predicate<Path> pred;
+    private List<Path> found = new ArrayList<>();
+    private Predicate<Path> pred;
 
     public SearchFiles(Predicate<Path> condition) {
         this.pred = condition;
@@ -20,12 +19,14 @@ public class SearchFiles extends SimpleFileVisitor<Path> {
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        found.add(file);
+        if (pred.test(file)) {
+            found.add(file);
+        }
         return FileVisitResult.CONTINUE;
     }
 
     public  List<Path> getPaths() {
-        return found.stream().filter(pred).collect(Collectors.toList());
+        return found;
     }
 }
 
