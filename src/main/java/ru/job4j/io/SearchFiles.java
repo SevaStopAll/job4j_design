@@ -22,7 +22,7 @@ public class SearchFiles extends SimpleFileVisitor<Path> {
     }
 
     public List<Path> getPaths() {
-        return found;
+        return found.stream().filter(pred).toList();
     }
 }
 
