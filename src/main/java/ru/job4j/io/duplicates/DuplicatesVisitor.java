@@ -10,13 +10,11 @@ import java.util.List;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
-    private FileProperty target;
     private List<Path> found = new ArrayList<>();
-    public DuplicatesVisitor(FileProperty target) {
-        this.target = target;
-    }
+
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+        FileProperty target = new FileProperty(file.toFile().length(), file.getFileName().toString());
         if (file.getFileName().toString().equals(target.getName()) && file.toFile().length() == target.getSize()) {
             found.add(file);
         }
