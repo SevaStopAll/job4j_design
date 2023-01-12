@@ -17,6 +17,7 @@ public class ArgsName {
 
     private void parse(String[] args) {
         for (String string : args) {
+            check(string);
             string = change(string);
             List<String> list;
             list = List.of(string.split("=", 2));
@@ -27,10 +28,13 @@ public class ArgsName {
         }
     }
 
-    private String change(String string) {
-            if (string.startsWith("-")) {
-                string = string.substring(1);
+    private void check(String string) {
+        if (!string.startsWith("-")) {
+            throw new IllegalArgumentException();
         }
+    }
+    private String change(String string) {
+            string = string.substring(1);
             return string;
     }
     public static ArgsName of(String[] args) {

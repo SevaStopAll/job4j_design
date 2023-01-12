@@ -54,8 +54,8 @@ class ArgsNameTest {
 
     @Test
     void whenSymbolIsMissing() {
-        ArgsName jvm = ArgsName.of(new String[] {"Xmx=512"});
-        assertThat(jvm.get("Xmx")).isEqualTo("512");
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"Xmx=512"}))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
    /* Добавьте тесты:
