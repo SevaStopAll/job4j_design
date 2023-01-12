@@ -21,10 +21,13 @@ public class Search {
     }
 
     public static void validate(String[] args) {
-        if (args.length == 0) {
+        if (args.length != 2) {
+            throw new IllegalArgumentException("The launch requires 2 parameters");
+        }
+        if (args[0] == null) {
             throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
         }
-        if (args.length < 2) {
+        if (args[1] == null) {
             throw new IllegalArgumentException("Required filename extension is null.");
         }
     }
