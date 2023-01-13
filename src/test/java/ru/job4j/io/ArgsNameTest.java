@@ -57,7 +57,4 @@ class ArgsNameTest {
         assertThatThrownBy(() -> ArgsName.of(new String[]{"Xmx=512"}))
                 .isInstanceOf(IllegalArgumentException.class);
     }
-
-   /* Добавьте тесты:
-     на отсутствие символа "=" "-ключ:значение", на отсутствие символа "-" "ключ=значение".*/
 }
