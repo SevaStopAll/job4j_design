@@ -11,12 +11,12 @@ import java.util.List;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
-    private HashMap<FileProperty,List<Path>> found = new HashMap<>();
+    private HashMap<FileProperty, List<Path>> found = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
         FileProperty key = new FileProperty(file.toFile().length(), file.getFileName().toString());
-        found.put(key, new ArrayList<Path>());
+        found.put(key, new ArrayList<>());
         if (found.containsKey(key)) {
             found.get(key).add(file);
         }
