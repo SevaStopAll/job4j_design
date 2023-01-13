@@ -9,7 +9,6 @@ public class Dir {
             throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
         }
         File file = new File(args[0]);
-        /*File file = new File("C:\\Users\\Мы\\IdeaProjects");*/
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
