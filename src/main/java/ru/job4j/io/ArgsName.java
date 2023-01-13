@@ -9,7 +9,7 @@ public class ArgsName {
     private final Map<String, String> values = new HashMap<>();
 
     public String get(String key) {
-    if (!values.containsKey(key) || values.get(key).equals("")) {
+    if (!values.containsKey(key)) {
             throw new IllegalArgumentException();
         }
         return values.get(key);
@@ -21,7 +21,7 @@ public class ArgsName {
             string = change(string);
             List<String> list;
             list = List.of(string.split("=", 2));
-            if (list.size() < 2) {
+            if (list.size() < 2 || list.get(1).equals("")) {
                 throw new IllegalArgumentException();
             }
             values.put(list.get(0), list.get(1));

@@ -42,8 +42,8 @@ class ArgsNameTest {
 
     @Test
     void whenValueIsMissing() {
-        ArgsName jvm = ArgsName.of(new String[] {"-key="});
-        assertThatThrownBy(() -> jvm.get("key")).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> ArgsName.of(new String[]{"-key="}))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
