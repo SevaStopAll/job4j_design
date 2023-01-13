@@ -26,6 +26,9 @@ public class Search {
             throw new IllegalArgumentException("The launch requires 2 parameters");
         }
         File file = new File(args[0]);
+        if (!file.exists()) {
+            throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
+        }
         if (!file.isDirectory()) {
             throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
         }
