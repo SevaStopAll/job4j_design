@@ -6,27 +6,24 @@ import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
 
-    private List<Path> found = new ArrayList<>();
+    private HashMap<FileProperty,List<Path>> found = new HashMap<>();
 
     @Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
-        FileProperty target = new FileProperty(file.toFile().length(), file.getFileName().toString());
-        if (file.getFileName().toString().equals(target.getName()) && file.toFile().length() == target.getSize()) {
-            found.add(file);
+        FileProperty key = new FileProperty(file.toFile().length(), file.getFileName().toString());
+        found.put(key, new ArrayList<Path>());
+        if (found.containsKey(key)) {
+            found.get(key).add(file);
         }
         return super.visitFile(file, attrs);
     }
 
     public void getDuplicates() {
-        if (found.size() == 0) {
-            System.out.println("Nothing was found");
-        } else {
-        System.out.printf("%s, %d, %n", target.getName(), target.getSize());
-        found.forEach(f -> System.out.println(f.toAbsolutePath().normalize()));
-        }
+        found.keySet().stream().filter(k -> !found.get(k).contains(null)).forEach(f -> System.out.printf("%s, %d, %n", f.getName(), f.getSize()));
     }
 }
