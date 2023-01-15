@@ -23,7 +23,6 @@ public class ArgsName {
             values.put(list.get(0), list.get(1));
         }
     }
-
     private void check(String string) {
         if (!string.startsWith("-") || !string.contains("=") || !string.matches("\\S{1,}=\\S{1,}")) {
             throw new IllegalArgumentException();
