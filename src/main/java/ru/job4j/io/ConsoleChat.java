@@ -1,10 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class ConsoleChat {
     private static final String OUT = "закончить";
@@ -26,17 +23,17 @@ public class ConsoleChat {
         boolean answersOn = true;
         Scanner sc  = new Scanner(System.in);
         Random rand = new Random();
+        answersPull = readPhrases();
         while (isWorking) {
-            answersPull = readPhrases();
             String question = sc.nextLine();
-            if (question.equals(STOP)) {
+            if (STOP.equals(question)) {
                 answersOn = false;
             }
-            if (question.equals(OUT)) {
+            if (OUT.equals(question)) {
                  isWorking = false;
                  answersOn = false;
             }
-            if (question.equals(CONTINUE)) {
+            if (CONTINUE.equals(question)) {
                 answersOn = true;
             }
             System.out.println(question);
@@ -53,15 +50,13 @@ public class ConsoleChat {
     }
 
     private List<String> readPhrases() {
-        StringBuilder builder = new StringBuilder();
+        List<String> answers = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(botAnswers))) {
-            br.lines().map(s -> s + System.lineSeparator()).forEach(builder::append);
+            br.lines().map(s -> s + System.lineSeparator()).forEach(answers::add);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return Arrays.stream(builder.toString()
-                .split(System.lineSeparator()))
-                .toList();
+        return answers;
     }
 
     private void saveLog(List<String> log) {
@@ -73,8 +68,8 @@ public class ConsoleChat {
     }
 
     public static void main(String[] args) {
-        String path = "C:\\Users\\Мы\\IdeaProjects\\job4j_design\\data\\logging.txt";
-        String answers = "C:\\Users\\Мы\\IdeaProjects\\job4j_design\\data\\answers.txt";
+        String path = "/home/vsevolod/IdeaProjects/job4j_design/data/logging.txt";
+        String answers = "/home/vsevolod/IdeaProjects/job4j_design/data/answers.txt";
         ConsoleChat cc = new ConsoleChat(path, answers);
         cc.run();
     }
