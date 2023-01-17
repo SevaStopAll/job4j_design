@@ -73,8 +73,8 @@ public class ConsoleChat {
     }
 
     public static void main(String[] args) {
-        String path = args[0];
-        String answers = args[1];
+        String path = "C:\\Users\\Мы\\IdeaProjects\\job4j_design\\data\\logging.txt";
+        String answers = "C:\\Users\\Мы\\IdeaProjects\\job4j_design\\data\\answers.txt";
         ConsoleChat cc = new ConsoleChat(path, answers);
         cc.run();
     }
