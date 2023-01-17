@@ -44,7 +44,7 @@ public class Zip {
         ArgsName jvm = ArgsName.of(args);
         validate(jvm);
         Zip zip = new Zip();
-        List<File> list = Search.search(Path.of(jvm.get("d")), f ->  !f.endsWith(jvm.get("e"))).stream().map(Path::toFile).toList();
+        List<File> list = Search.search(Path.of(jvm.get("d")), f -> !f.endsWith(jvm.get("e"))).stream().map(Path::toFile).toList();
         zip.packFiles(
                 list,
                 new File(jvm.get("o")
