@@ -9,9 +9,7 @@ public class ConsoleChat {
     private static final String CONTINUE = "продолжить";
     private final String path;
     private final String botAnswers;
-    StringBuilder text = new StringBuilder();
-
-    List<String> answersPull;
+    private StringBuilder text = new StringBuilder();
 
     public ConsoleChat(String path, String botAnswers) {
         this.path = path;
@@ -23,7 +21,7 @@ public class ConsoleChat {
         boolean answersOn = true;
         Scanner sc  = new Scanner(System.in);
         Random rand = new Random();
-        answersPull = readPhrases();
+        List<String> answersPull = readPhrases();
         while (isWorking) {
             String question = sc.nextLine();
             if (STOP.equals(question)) {
@@ -52,7 +50,7 @@ public class ConsoleChat {
     private List<String> readPhrases() {
         List<String> answers = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(botAnswers))) {
-            br.lines().map(s -> s + System.lineSeparator()).forEach(answers::add);
+            br.lines().forEach(answers::add);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -68,8 +66,8 @@ public class ConsoleChat {
     }
 
     public static void main(String[] args) {
-        String path = "/home/vsevolod/IdeaProjects/job4j_design/data/logging.txt";
-        String answers = "/home/vsevolod/IdeaProjects/job4j_design/data/answers.txt";
+        String path = "C:\\projects\\job4j_design\\data\\logging.txt";
+        String answers = "C:\\projects\\job4j_design\\data\\answers.txt";
         ConsoleChat cc = new ConsoleChat(path, answers);
         cc.run();
     }
