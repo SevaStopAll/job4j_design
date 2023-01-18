@@ -28,7 +28,7 @@ public class CSVReader {
         if (!args.get("delimiter").startsWith(";")) {
             throw new IllegalArgumentException(String.format("Not a delimiter %s", args.get("delimiter")));
         }
-        /*if (!args.get("out").equals("stdout")) {
+        /* if (!args.get("out").equals("stdout")) {
             throw new IllegalArgumentException(String.format("Not a correct out %s", args.get("out")));
         }*/
     }
