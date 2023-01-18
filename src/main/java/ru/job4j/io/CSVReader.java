@@ -1,22 +1,27 @@
 package ru.job4j.io;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.util.StringJoiner;
+import java.io.*;
+import java.util.*;
 
 public class CSVReader {
+    private static final String CONSOLE = "stdout";
     public static void handle(ArgsName argsName) throws Exception {
-        Scanner sc = new Scanner(argsName.get("path"));
-        argsName.get("path");
-        argsName.get("delimiter");
-        argsName.get("out");
-        argsName.get("filter");
+        Scanner sc = new Scanner(new File(argsName.get("path")));
+/*      argsName.get("filter");*/
+        List<String> categories = new ArrayList<>(Arrays.stream(sc.nextLine().split(";")).toList());
+        categories.forEach(System.out::print);
+        System.out.println();
+        System.out.println("Now the data");
         while (sc.hasNextLine()) {
-            sc.nextLine().split(argsName.get("delimiter"));
+            if (CONSOLE.equals(argsName.get("out"))) {
+                System.out.println(Arrays.toString(sc.nextLine().split(argsName.get("delimiter"))));
+            } else {
+                try (PrintWriter pw = new PrintWriter(new FileWriter(argsName.get("out"), true))) {
+                    pw.println(Arrays.toString(sc.nextLine().split(argsName.get("delimiter"))));
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
         }
     }
 
@@ -34,11 +39,12 @@ public class CSVReader {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 4) {
+        /*if (args.length != 4) {
             throw new IllegalArgumentException("The launch requires 4 parameters");
         }
+
+        validate(jvm);*/
         ArgsName jvm = ArgsName.of(args);
-        validate(jvm);
         CSVReader.handle(jvm);
     }
 }
