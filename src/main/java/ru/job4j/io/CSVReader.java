@@ -11,11 +11,13 @@ import java.util.StringJoiner;
 public class CSVReader {
     public static void handle(ArgsName argsName) throws Exception {
         Scanner sc = new Scanner(argsName.get("path"));
-
         argsName.get("path");
         argsName.get("delimiter");
         argsName.get("out");
         argsName.get("filter");
+        while (sc.hasNextLine()) {
+            sc.nextLine().split(argsName.get("delimiter"));
+        }
     }
 
     private static void validate(ArgsName args) {
@@ -38,8 +40,6 @@ public class CSVReader {
         ArgsName jvm = ArgsName.of(args);
         validate(jvm);
         CSVReader.handle(jvm);
-
-
     }
 }
 
