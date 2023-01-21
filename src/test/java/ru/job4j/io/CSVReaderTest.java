@@ -72,7 +72,7 @@ class CSVReaderTest {
                 "William;30;Brown;Secondary special"
         );
         File file = new File("C:\\Users\\Мы\\IdeaProjects\\job4j_design\\data\\test.csv");
-        File target = new File("C:\\projects\\job4j_design\\data\\target.csv");
+        File target = new File("C:\\Users\\Мы\\IdeaProjects\\job4j_design\\data\\target.csv");
         ArgsName argsName = ArgsName.of(new String[]{
                 "-path=" + file.getAbsolutePath(), "-delimiter=;",
                 "-out=" + target.getAbsolutePath(), "-filter=name,education"});
