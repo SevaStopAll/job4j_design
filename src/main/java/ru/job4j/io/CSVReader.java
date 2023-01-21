@@ -6,12 +6,15 @@ public class CSVReader {
     public static void handle(ArgsName argsName) throws Exception {
         Scanner sc = new Scanner(new File(argsName.get("path")));
         List<String> filter = Arrays.stream(argsName.get("filter").split(",")).toList();
-        List<String> categories = new ArrayList<>(Arrays.stream(sc.nextLine().split(";")).toList());
+        List<String> categories = new ArrayList<>(Arrays.stream(sc.nextLine().split(argsName.get("delimiter"))).toList());
         List<Integer> indexes = new ArrayList<>();
-        for (int index = 0; index < categories.size(); index++) {
-            if (filter.contains(categories.get(index))) {
-                indexes.add(index);
+        for (String string : filter) {
+            for (String string2 : categories) {
+                if (string.equals(string2)) {
+                    indexes.add(categories.indexOf(string2));
+                }
             }
+
         }
         if (CONSOLE.equals(argsName.get("out"))) {
             indexes.forEach(index -> System.out.printf("%s%s", categories.get(index), argsName.get("delimiter")));
