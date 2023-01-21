@@ -3,6 +3,7 @@ import java.io.*;
 import java.util.*;
 public class CSVReader {
     private static final String CONSOLE = "stdout";
+
     public static void handle(ArgsName argsName) throws Exception {
         Scanner sc = new Scanner(new File(argsName.get("path")));
         List<String> filter = Arrays.stream(argsName.get("filter").split(",")).toList();
@@ -14,7 +15,6 @@ public class CSVReader {
                     indexes.add(categories.indexOf(string2));
                 }
             }
-
         }
         if (CONSOLE.equals(argsName.get("out"))) {
             indexes.forEach(index -> System.out.printf("%s%s", categories.get(index), argsName.get("delimiter")));
@@ -38,7 +38,6 @@ public class CSVReader {
                         pw.print(categories.get(index));
                     }
                 }
-                /*indexes.forEach(index -> pw.printf("%s%s", categories.get(index), argsName.get("delimiter")));*/
                 pw.println();
                 while (sc.hasNextLine()) {
                     ArrayList<String> target = new ArrayList<>(Arrays.stream(sc.nextLine().split(argsName.get("delimiter"))).toList());
@@ -58,11 +57,12 @@ public class CSVReader {
     }
 
     private static void validate(ArgsName args) {
+        String regex = "[,;]";
         File file = new File(args.get("path"));
         if (!file.exists()) {
             throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
         }
-        if (!args.get("delimiter").startsWith(";")) {
+        if (!args.get("delimiter").matches(regex)) {
             throw new IllegalArgumentException(String.format("Not a delimiter %s", args.get("delimiter")));
         }
         if (!CONSOLE.equals(args.get("out")) && !new File(args.get("out")).isFile()) {

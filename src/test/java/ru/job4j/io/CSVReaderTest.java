@@ -63,28 +63,22 @@ class CSVReaderTest {
     }
 
     @Test
-    void whenFilterTwoColumns1() throws Exception {
-        String data = String.join(
-                System.lineSeparator(),
-                "name;age;last_name;education",
-                "Tom;20;Smith;Bachelor",
-                "Jack;25;Johnson;Undergraduate",
-                "William;30;Brown;Secondary special"
-        );
-        File file = new File("C:\\Users\\Мы\\IdeaProjects\\job4j_design\\data\\test.csv");
-        File target = new File("C:\\Users\\Мы\\IdeaProjects\\job4j_design\\data\\target.csv");
-        ArgsName argsName = ArgsName.of(new String[]{
-                "-path=" + file.getAbsolutePath(), "-delimiter=;",
-                "-out=" + target.getAbsolutePath(), "-filter=name,education"});
-        Files.writeString(file.toPath(), data);
-        String expected = String.join(
-                System.lineSeparator(),
-                "name;education",
-                "Tom;Bachelor",
-                "Jack;Undergraduate",
-                "William;Secondary special"
-        ).concat(System.lineSeparator());
-        CSVReader.handle(argsName);
-        assertThat(Files.readString(target.toPath())).isEqualTo(expected);
+    void whenLessThan4Parameters(@TempDir Path folder) throws Exception {
+
+    }
+
+    @Test
+    void whenIncorrectDelemiter(@TempDir Path folder) throws Exception {
+
+    }
+
+    @Test
+    void whenPathNotExist(@TempDir Path folder) throws Exception {
+
+    }
+
+    @Test
+    void whenOutNotCorrect(@TempDir Path folder) throws Exception {
+
     }
 }
