@@ -8,7 +8,6 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 
 class CSVReaderTest {
-
     @Test
     void whenFilterTwoColumns(@TempDir Path folder) throws Exception {
         String data = String.join(
@@ -60,25 +59,5 @@ class CSVReaderTest {
         ).concat(System.lineSeparator());
         CSVReader.handle(argsName);
         assertThat(Files.readString(target.toPath())).isEqualTo(expected);
-    }
-
-    @Test
-    void whenLessThan4Parameters(@TempDir Path folder) throws Exception {
-
-    }
-
-    @Test
-    void whenIncorrectDelemiter(@TempDir Path folder) throws Exception {
-
-    }
-
-    @Test
-    void whenPathNotExist(@TempDir Path folder) throws Exception {
-
-    }
-
-    @Test
-    void whenOutNotCorrect(@TempDir Path folder) throws Exception {
-
     }
 }
