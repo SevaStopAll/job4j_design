@@ -25,4 +25,6 @@ public class Person {
                 + ", statuses=" + Arrays.toString(statuses)
                 + '}';
     }
+
+
 }
