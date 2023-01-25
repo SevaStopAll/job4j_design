@@ -1,5 +1,4 @@
-package ru.job4j.serialization;
-
+package ru.job4j.serialization.java;
 import java.io.*;
 import java.nio.file.Files;
 
@@ -49,3 +48,4 @@ public class Contact implements Serializable {
         }
     }
 }
+
