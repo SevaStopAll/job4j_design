@@ -1,17 +1,18 @@
 package ru.job4j.finder;
 
-import ru.job4j.io.SearchFiles;
-import ru.job4j.io.ArgsName;
-
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.function.Predicate;
 
 public class Main {
+    private static final String NAME = "file";
+    private static final String MASK = "mask";
+    private static final String REGEX = "regex";
+    private static List<String> results = new ArrayList<>();
 
     public static List<Path> search(Path root, Predicate<Path> condition) throws IOException {
         SearchFiles searcher = new SearchFiles(condition);
@@ -19,42 +20,45 @@ public class Main {
         return searcher.getPaths();
     }
 
-    /*public static void validate(ArgsName args) {
-        if (args.length != 4) {
-            throw new IllegalArgumentException("The launch requires 4 parameters");
+    private static void validate(ArgsName args) {
+        File folder = new File(args.get("d"));
+        if (!folder.isDirectory()) {
+            throw new IllegalArgumentException(String.format("Not a directory %s", folder.getAbsoluteFile()));
         }
-        File file = new File(args[0]);
-        *//*if (!file.exists()) {
-            throw new IllegalArgumentException(String.format("Not exist %s", file.getAbsoluteFile()));
-        }*//*
-        if (!file.isDirectory()) {
-            throw new IllegalArgumentException(String.format("Not directory %s", file.getAbsoluteFile()));
+        if ((!NAME.equals(args.get("t")) && (!MASK.equals(args.get("t")) && (!REGEX.equals(args.get("t")))))) {
+            throw new IllegalArgumentException(String.format("Not a search option %s", args.get("t")));
         }
-        *//*if (!args[1].startsWith(".") || args[1].length() < 2) {
-            throw new IllegalArgumentException(String.format("Not an extension %s", args[1]));
-        }*//*
-    }*/
+    }
+
+    private static void record(List<String> names, String path) {
+        try (PrintWriter out = new PrintWriter(
+                new BufferedOutputStream(
+                        new FileOutputStream(path)
+                ))) {
+            names.forEach(out::println);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 
     public static void main(String[] args) throws IOException {
         ArgsName jvm = ArgsName.of(args);
-/*        validate(jvm);*/
+        validate(jvm);
         Path start = Paths.get(jvm.get("d"));
-        search(start, p -> p.toFile().getName().equals(jvm.get("n"))).forEach(System.out::println);
+        if (NAME.equals(jvm.get("t"))) {
+            search(start, p -> p.toFile().getName().equals(jvm.get("n")))
+                    .forEach(path -> results.add(path.toString()));
+        }
+        if (MASK.equals(jvm.get("t"))) {
+            String mask = jvm.get("n").replace("*", "\\w+").replace("?", "\\w{1}");
+            search(start, p -> p.toFile().getName().matches(mask))
+                    .forEach(path -> results.add(path.toString()));
+        }
+        if (REGEX.equals(jvm.get("t"))) {
+            search(start, p -> p.toFile().getName().matches(jvm.get("n")))
+                    .forEach(path -> results.add(path.toString()));
+        }
+        record(results, jvm.get("o"));
     }
 }
-
-
-
-/*    1. Создать программу для поиска файлов. Все классы, относящиеся к этому заданию должны быть в отдельном пакете
-    Важно! Допускается использование ранее созданных вами классов.
-            2. Программа должна искать данные в заданном каталоге и подкаталогах.
-3. Имя файла может задаваться, целиком, по маске, по регулярному выражению(не обязательно).
-            4. Программа должна запускаться с параметрами, например:  -d=c:/ -n=*.?xt -t=mask -o=log.txt
-            Ключи
--d - директория, в которой начинать поиск.
-            -n - имя файла, маска, либо регулярное выражение.
-            -t - тип поиска: mask искать по маске, name по полному совпадение имени, regex по регулярному выражению.
--o - результат записать в файл.
-            5. Программа должна записывать результат в файл.
-            6. В программе должна быть валидация ключей и подсказка.*/
 
