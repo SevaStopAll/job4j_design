@@ -50,7 +50,7 @@ public class Main {
                     .forEach(path -> results.add(path.toString()));
         }
         if (MASK.equals(jvm.get("t"))) {
-            String mask = jvm.get("n").replace("*", "\\w+").replace("?", "\\w{1}");
+            String mask = jvm.get("n").replace(".", "[.]").replace("*", "\\w+").replace("?", "\\w{1}");
             search(start, p -> p.toFile().getName().matches(mask))
                     .forEach(path -> results.add(path.toString()));
         }
