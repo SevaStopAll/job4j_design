@@ -6,7 +6,7 @@ id serial primary key,
     count numeric);
 
 insert into students
-(name, surname, age)
+(name, surname, age, count)
 values ('Alex', 'Smith', 25, 2200.0);
 
 select * from students;
