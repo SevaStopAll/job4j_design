@@ -1,13 +1,13 @@
 create table classes(
     id serial primary key,
     name varchar(255),
-    students: int
+    students int
 );
 
-create table students(
+create table pupils(
     id serial primary key,
     name varchar(255),
-    class_id: int references classes(id),
-    awg_mark: real
+    class_id int references classes(id),
+    awg_mark real
 );
 

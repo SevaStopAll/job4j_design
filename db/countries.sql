@@ -7,5 +7,5 @@ create table countries(
 create table capitals(
     id serial primary key,
     name varchar(250),
-    country_id references countries(id) unique
+    country_id int references countries(id) unique
 );
