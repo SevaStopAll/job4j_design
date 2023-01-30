@@ -44,4 +44,4 @@ values('Мясо мороженое Курица истекает', '27-01-2023'
 create view show_dayry_expensive_on_2024
     as select pr.name from product as pr
     join type t on pr.type_id = t.id
-    where pr.price > 200 and product.expired_date < current_date;
+    where pr.price > 200 and pr.expired_date < current_date;
