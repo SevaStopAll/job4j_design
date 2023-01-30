@@ -49,3 +49,4 @@ values('Max', 'M'), ('Marta', 'F'), ('Collin', 'M'),
 
 select e.name, e.gender, a.gender, a.name from teens e
 cross join teens a
+where e.gender != a.gender;
