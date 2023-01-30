@@ -10,7 +10,7 @@ create table employees(
 );
 
 insert into departments(name)
-values('HR'), ('RnD'), ('SEC'), ('IT'), ('Prod');
+values('HR'), ('RnD'), ('SEC'), ('IT'), ('Prod'), ('QA');
 
 insert into employees(name, department_id)
 values('Alex', 1), ('Charlie', 2),
@@ -27,8 +27,8 @@ full join employees e on d.id = e.department_id;
 
 select * from departments d  cross join employees e;
 
-select * from employees e
-left join departments d
+select * from departments d
+left join employees e
 on d.id = e.department_id where e.department_id is null;
 
 select d.name, e.name from employees e
