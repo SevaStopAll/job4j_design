@@ -59,8 +59,8 @@ SELECT p.name, p.price, p.expired_date, t.name
 FROM product as p
 JOIN type as t
 ON p.type_id= t.id
-GROUP BY p.name, p.price, p.expired_date, t.name
-HAVING p.price = (select max(price) from product);
+WHERE p.price = (select max(price) from product)
+GROUP BY p.name, p.price, p.expired_date, t.name;
 
 SELECT t.name, count(t.name)
 FROM product as p
