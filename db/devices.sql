@@ -101,5 +101,5 @@ join devices
 on devices.id = devices_people.device_id
 join people
 on people.id = devices_people.people_id
-group by people.name;
+group by people.name
 having avg(devices.price) > 5000.00;
