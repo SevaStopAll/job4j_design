@@ -10,7 +10,7 @@ insert into customers(first_name, last_name, age, country) values('Irina', 'Mara
 insert into customers(first_name, last_name, age, country) values('Olga', 'Marutova', 40, 'Russia');
 insert into customers(first_name, last_name, age, country) values('Karina', 'Lisina', 18, 'Russia');
 
-SELECT first_name, last_name, (SELECT MIN(age) from customers) as min_age from customers;
+SELECT first_name, last_name from customers WHERE age = (SELECT MIN(age) from customers);
 
 CREATE TABLE orders(
     id serial primary key,
