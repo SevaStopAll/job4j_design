@@ -20,14 +20,16 @@ public class Config {
 
     public void load() {
         try (BufferedReader read = new BufferedReader(new FileReader(this.path))) {
-            String target = read.readLine();
-            Pattern pattern = Pattern.compile("\\S=\\S");
-            Matcher match = pattern.matcher(target);
-            if (!target.startsWith("#") && match.find()) {
-                String[] val = target.split("=", 2);
-                values.put(val[0], val[1]);
-            } else {
-                throw new IllegalArgumentException();
+            while (read.ready()) {
+                String target = read.readLine();
+                Pattern pattern = Pattern.compile("\\S=\\S");
+                Matcher match = pattern.matcher(target);
+                if (!target.startsWith("#") && match.find()) {
+                    String[] val = target.split("=", 2);
+                    values.put(val[0], val[1]);
+                } else {
+                    throw new IllegalArgumentException();
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -35,7 +37,6 @@ public class Config {
     }
 
     public String value(String key) {
-
         return values.get(key);
     }
 
