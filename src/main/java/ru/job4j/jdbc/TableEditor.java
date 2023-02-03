@@ -20,56 +20,51 @@ public class TableEditor implements AutoCloseable {
         connection = DriverManager.getConnection(properties.getProperty("url"), properties.getProperty("login"), properties.getProperty("password"));
     }
 
-
-    public void createTable(String tableName) throws Exception {
+    private void execute(String sql) throws Exception {
         try (Statement statement = connection.createStatement()) {
-
-            String sql = String.format(
-                    "create table if not exists %s();", tableName
-            );
             statement.execute(sql);
-            System.out.println(getTableScheme(tableName));
         }
     }
 
+    public void createTable(String tableName) throws Exception {
+        String sql = String.format(
+                "create table if not exists %s();", tableName
+        );
+        execute(sql);
+        System.out.println(getTableScheme(tableName));
+    }
+
+
     public void dropTable(String tableName) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "drop table %s;", tableName
-            );
-            statement.execute(sql);
-            System.out.println("Table was dropped");
-        }
+        String sql = String.format(
+                "drop table %s;", tableName
+        );
+        execute(sql);
+        System.out.println("Table was dropped");
     }
 
     public void addColumn(String tableName, String columnName, String type) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "alter table %s add column %s %s", tableName, columnName, type
-            );
-            statement.execute(sql);
-            System.out.println(getTableScheme(tableName));
-        }
+        String sql = String.format(
+                "alter table %s add column %s %s", tableName, columnName, type
+        );
+        execute(sql);
+        System.out.println(getTableScheme(tableName));
     }
 
     public void dropColumn(String tableName, String columnName) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "alter table %s drop column %s", tableName, columnName
-            );
-            statement.execute(sql);
-            System.out.println(getTableScheme(tableName));
-        }
+        String sql = String.format(
+                "alter table %s drop column %s", tableName, columnName
+        );
+        execute(sql);
+        System.out.println(getTableScheme(tableName));
     }
 
     public void renameColumn(String tableName, String columnName, String newColumnName) throws Exception {
-        try (Statement statement = connection.createStatement()) {
-            String sql = String.format(
-                    "alter table %s rename %s to %s", tableName, columnName, newColumnName
-            );
-            statement.execute(sql);
-            System.out.println(getTableScheme(tableName));
-        }
+    String sql = String.format(
+            "alter table %s rename %s to %s", tableName, columnName, newColumnName
+    );
+    execute(sql);
+    System.out.println(getTableScheme(tableName));
     }
 
 
