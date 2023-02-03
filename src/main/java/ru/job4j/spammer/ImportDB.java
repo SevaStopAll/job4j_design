@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Properties;
 
 public class ImportDB {
-
     private Properties cfg;
     private String dump;
 
@@ -53,7 +52,6 @@ public class ImportDB {
             this.email = email;
         }
     }
-
 
     public static void main(String[] args) throws Exception {
         Properties cfg = new Properties();
