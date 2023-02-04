@@ -1,10 +1,7 @@
 package ru.job4j.spammer;
 
 import java.io.*;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -18,10 +15,23 @@ public class ImportDB {
         this.dump = dump;
     }
 
+    private boolean verify(String[] array) {
+        boolean result = true;
+        if (array.length == 2 || (array[0].equals("") && array[1].equals("")) || !array[1].contains("@")) {
+            return result;
+        }
+        throw new IllegalArgumentException();
+    }
+
     public List<User> load() throws IOException {
         List<User> users = new ArrayList<>();
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
-            rd.lines().forEach(line -> users.add(new User(line.split(";", 1)[0], line.split(";")[1])));
+            while (rd.ready()) {
+                String[] string = rd.readLine().split(";", 2);
+                if (verify(string)) {
+                    users.add(new User(string[0], string[1].split(";")[0]));
+                }
+            }
         }
         return users;
     }
@@ -33,6 +43,15 @@ public class ImportDB {
                 cfg.getProperty("jdbc.username"),
                 cfg.getProperty("jdbc.password")
         )) {
+            try (Statement statement = cnt.createStatement()) {
+                String sql = String.format(
+                        "create table if not exists users(%s, %s);",
+                        "id serial primary key",
+                        "name varchar(255)",
+                        "email varchar(250)"
+                );
+                statement.execute(sql);
+            }
             for (User user : users) {
                 try (PreparedStatement ps = cnt.prepareStatement("insert into users(name, email) values (?, ?)")) {
                     ps.setString(1, user.name);
