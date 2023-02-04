@@ -16,7 +16,7 @@ public class ImportDB {
     }
 
     private void verify(String[] array) {
-        if (array.length != 2 || (array[0].isBlank() && array[1].isBlank()) || !array[1].contains("@")) {
+        if (array.length != 2 || array[0].isBlank() || array[1].isBlank() || !array[1].contains("@")) {
             throw new IllegalArgumentException();
         }
     }
