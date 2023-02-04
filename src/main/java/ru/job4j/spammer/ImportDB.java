@@ -15,12 +15,10 @@ public class ImportDB {
         this.dump = dump;
     }
 
-    private boolean verify(String[] array) {
-        boolean result = true;
-        if (array.length == 2 || (array[0].equals("") && array[1].equals("")) || !array[1].contains("@")) {
-            return result;
+    private void verify(String[] array) {
+        if (array.length != 2 || (array[0].isBlank() && array[1].isBlank()) || !array[1].contains("@")) {
+            throw new IllegalArgumentException();
         }
-        throw new IllegalArgumentException();
     }
 
     public List<User> load() throws IOException {
@@ -28,9 +26,8 @@ public class ImportDB {
         try (BufferedReader rd = new BufferedReader(new FileReader(dump))) {
             while (rd.ready()) {
                 String[] string = rd.readLine().split(";", 2);
-                if (verify(string)) {
-                    users.add(new User(string[0], string[1].split(";")[0]));
-                }
+                verify(string);
+                users.add(new User(string[0], string[1].split(";")[0]));
             }
         }
         return users;
