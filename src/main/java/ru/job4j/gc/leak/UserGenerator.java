@@ -12,7 +12,7 @@ public class UserGenerator implements Generate {
     public static final String PATH_PATRONS = "src/main/java/ru/job4j/gc/leak/files/patr.txt";
 
     public static final String SEPARATOR = " ";
-    public static final int NEW_USERS = 1000;
+    public static final int NEW_USERS = 50;
 
     public static List<String> names;
     public static List<String> surnames;
