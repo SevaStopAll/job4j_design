@@ -7,12 +7,12 @@ import java.util.Random;
 
 public class UserGenerator implements Generate {
 
-    public final String PATH_NAMES = "src/main/java/ru/job4j/gc/leak/files/names.txt";
-    public final String PATH_SURNAMES = "src/main/java/ru/job4j/gc/leak/files/surnames.txt";
-    public final String PATH_PATRONS = "src/main/java/ru/job4j/gc/leak/files/patr.txt";
+    public static final String PATH_NAMES = "src/main/java/ru/job4j/gc/leak/files/names.txt";
+    public static final String PATH_SURNAMES = "src/main/java/ru/job4j/gc/leak/files/surnames.txt";
+    public static final String PATH_PATRONS = "src/main/java/ru/job4j/gc/leak/files/patr.txt";
 
-    public final String SEPARATOR = " ";
-    public final Integer NEW_USERS = 1000;
+    public static final String SEPARATOR = " ";
+    public static final int NEW_USERS = 1000;
 
     public static List<String> names;
     public static List<String> surnames;
