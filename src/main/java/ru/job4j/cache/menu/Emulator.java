@@ -4,6 +4,10 @@ import ru.job4j.cache.DirFileCache;
 import java.util.Scanner;
 
 public class Emulator {
+
+    public final static int DIRECTORY = 1;
+    public final static int LOADING = 2;
+    public final static int GETTING = 3;
     public static final String MENU = """
                 Введите 1 для смены директории
                 Введите 2, чтобы загрузить содержимое файла в кэщ.
@@ -20,17 +24,17 @@ public class Emulator {
             int userChoice = Integer.parseInt(scanner.nextLine());
             System.out.println(userChoice);
             switch (userChoice) {
-                case 1:
+                case DIRECTORY:
                     System.out.println("Введите директорию");
                     String path = scanner.nextLine();
                     dif = new DirFileCache(path);
                     break;
-                case 2:
+                case LOADING:
                     System.out.println("Введите имя файла");
                     String file = scanner.nextLine();
                     dif.get(file);
                     break;
-                case 3:
+                case GETTING:
                     System.out.println("Введите имя файла");
                     file = scanner.nextLine();
                     System.out.println(dif.get(file));
