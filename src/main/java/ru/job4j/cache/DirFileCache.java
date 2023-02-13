@@ -14,10 +14,10 @@ public class DirFileCache extends AbstractCache<String, String> {
     protected String load(String key) {
         StringBuilder builder = new StringBuilder();
         if (!cache.containsKey(key)) {
-            try (BufferedReader in = new BufferedReader(new FileReader(key))) {
+            try (BufferedReader in = new BufferedReader(new FileReader(cachingDir + key))) {
                 in.lines().forEach(builder::append);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                e.printStackTrace();
             }
         }
         return builder.toString();

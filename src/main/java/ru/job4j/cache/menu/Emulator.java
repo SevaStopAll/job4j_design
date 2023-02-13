@@ -1,8 +1,6 @@
 package ru.job4j.cache.menu;
 
 import ru.job4j.cache.DirFileCache;
-
-import java.nio.file.Path;
 import java.util.Scanner;
 
 public class Emulator {
@@ -14,30 +12,34 @@ public class Emulator {
             """;
 
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        DirFileCache dif = new DirFileCache("C:/projects/job4j_design/data/");
+        try (Scanner scanner = new Scanner(System.in)) {
         boolean on = true;
         while (on) {
             System.out.println(MENU);
-            String path = scanner.nextLine();
             int userChoice = Integer.parseInt(scanner.nextLine());
             System.out.println(userChoice);
-            DirFileCache cache = new DirFileCache(path);
             switch (userChoice) {
                 case 1:
-                    path = scanner.nextLine();
+                    System.out.println("Введите директорию");
+                    String path = scanner.nextLine();
+                    dif = new DirFileCache(path);
                     break;
                 case 2:
-                    cache.put(Path.of(path), );
+                    System.out.println("Введите имя файла");
+                    String file = scanner.nextLine();
+                    dif.get(file);
                     break;
                 case 3:
-                    cache.get(path);
+                    System.out.println("Введите имя файла");
+                    file = scanner.nextLine();
+                    System.out.println(dif.get(file));
                     break;
                 default:
                     on = false;
                     break;
-
             }
-
+        }
         }
     }
 }
