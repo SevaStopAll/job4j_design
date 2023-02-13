@@ -1,6 +1,5 @@
 package ru.job4j.gc.leak;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -14,9 +13,9 @@ public class UserGenerator implements Generate {
     public static final String SEPARATOR = " ";
     public static final int NEW_USERS = 50;
 
-    public static List<String> names;
-    public static List<String> surnames;
-    public static List<String> patrons;
+    public List<String> names;
+    public List<String> surnames;
+    public List<String> patrons;
     private static List<User> users = new ArrayList<>();
     private Random random;
 
@@ -29,11 +28,19 @@ public class UserGenerator implements Generate {
     public void generate() {
         users.clear();
         for (int i = 0; i < NEW_USERS; i++) {
-            users.add(new User(
+            String name = String.format("%s%s%s%s%s",
+                    surnames.get(random.nextInt(surnames.size())), SEPARATOR,
+                            names.get(random.nextInt(names.size())), SEPARATOR,
+                             patrons.get(random.nextInt(patrons.size())));
+            users.add(new User(name));
+        }
+
+/*            String name = String.format("%s%s%s%s%s",
                     surnames.get(random.nextInt(surnames.size())) + SEPARATOR
                             + names.get(random.nextInt(names.size())) + SEPARATOR
-                            + patrons.get(random.nextInt(patrons.size()))));
-        }
+                            + patrons.get(random.nextInt(patrons.size())));
+            users.add(new User(name));
+        }*/
     }
 
     private void readAll() {
