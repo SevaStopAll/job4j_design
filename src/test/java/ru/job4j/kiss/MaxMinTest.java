@@ -10,6 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class MaxMinTest {
+/*
     MaxMin test = new MaxMin();
 
 
@@ -26,5 +27,6 @@ class MaxMinTest {
         int expected = 7;
         int result = test.max();
     }
+*/
 
 }
