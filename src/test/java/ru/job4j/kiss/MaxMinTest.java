@@ -10,7 +10,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.*;
 
 class MaxMinTest {
-/*
+
     MaxMin test = new MaxMin();
 
 
@@ -18,15 +18,15 @@ class MaxMinTest {
     void whenFirstIsMin() {
         List<Integer> list = Arrays.asList(4, 6, 5, 7);
         int expected = 4;
-        int result = test.min();
+        int result = test.min(list, test.ourComparator);
     }
 
     @Test
     void whenFirstIsMax() {
         List<Integer> list = Arrays.asList(7, 5, 6, 3);
         int expected = 7;
-        int result = test.max();
+        int result = test.max(list, test.ourComparator);
     }
-*/
+
 
 }
