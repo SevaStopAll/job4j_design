@@ -16,7 +16,7 @@ public class UserGenerator implements Generate {
     public List<String> names;
     public List<String> surnames;
     public List<String> patrons;
-    private static List<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
     private Random random;
 
     public UserGenerator(Random random) {
@@ -34,13 +34,6 @@ public class UserGenerator implements Generate {
                              patrons.get(random.nextInt(patrons.size())));
             users.add(new User(name));
         }
-
-/*            String name = String.format("%s%s%s%s%s",
-                    surnames.get(random.nextInt(surnames.size())) + SEPARATOR
-                            + names.get(random.nextInt(names.size())) + SEPARATOR
-                            + patrons.get(random.nextInt(patrons.size())));
-            users.add(new User(name));
-        }*/
     }
 
     private void readAll() {
@@ -53,7 +46,7 @@ public class UserGenerator implements Generate {
         return users.get(random.nextInt(users.size()));
     }
 
-    public static List<User> getUsers() {
+    public List<User> getUsers() {
         return users;
     }
 }
