@@ -1,6 +1,6 @@
 package ru.job4j.ood.srp;
 
-public class EmailSearcher implements Searcher{
+public class EmailSearcher implements Searcher {
 
     @Override
     public void validate() {

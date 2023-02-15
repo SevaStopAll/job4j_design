@@ -2,7 +2,7 @@ package ru.job4j.ood.srp;
 
 import java.sql.Connection;
 
-public class DBReader implements Reader{
+public class DBReader implements Reader {
     @Override
     public Connection connect() {
         return null;
