@@ -2,18 +2,20 @@ package ru.job4j.kiss;
 
 import java.util.Comparator;
 import java.util.List;
+import java.util.function.BiPredicate;
+import java.util.function.Predicate;
 
 public class MaxMin {
 
     public <T> T max(List<T> value, Comparator<T> comparator) {
-        return count(value, comparator);
+        return findExtremum(value, comparator.reversed());
     }
 
     public <T> T min(List<T> value, Comparator<T> comparator) {
-        return count(value, comparator);
+        return  findExtremum(value, comparator);
     }
 
-    private <T> T count(List<T> value, Comparator<T> comparator) {
+    private <T> T findExtremum(List<T> value, Comparator<T> comparator) {
         if (value == null) {
             throw new IllegalArgumentException("List is null");
         }

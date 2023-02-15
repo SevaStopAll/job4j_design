@@ -23,7 +23,7 @@ class MaxMinTest {
     void whenFirstIsMax() {
         List<Integer> list = Arrays.asList(7, 5, 6, 3);
         int expected = 7;
-        Comparator<Integer> comparator = Comparator.reverseOrder();
+        Comparator<Integer> comparator = Integer::compareTo;
         int result = test.max(list, comparator);
         assertThat(result).isEqualTo(expected);
     }
@@ -32,7 +32,7 @@ class MaxMinTest {
     void whenLastIsMax() {
         List<Integer> list = Arrays.asList(7, 5, 6, 11);
         int expected = 11;
-        Comparator<Integer> comparator = Comparator.reverseOrder();
+        Comparator<Integer> comparator = Integer::compareTo;
         int result = test.max(list, comparator);
         assertThat(result).isEqualTo(expected);
     }
@@ -41,7 +41,7 @@ class MaxMinTest {
     void whenLastIsMin() {
         List<Integer> list = Arrays.asList(7, 5, 6, 1);
         int expected = 1;
-        Comparator<Integer> comparator = Integer::compareTo;
+        Comparator<Integer> comparator = Comparator.reverseOrder();
         int result = test.max(list, comparator);
         assertThat(result).isEqualTo(expected);
     }
@@ -52,6 +52,22 @@ class MaxMinTest {
         Comparator<Integer> comparator = Integer::compareTo;
         assertThatThrownBy(() -> test.max(list, comparator))
                 .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    void whenStringComparatorMax() {
+        List<String> list = Arrays.asList("Russia", "UK", "USA", "Cuba");
+        Comparator<String> comparator = Comparator.comparingInt(String::length);
+        String expected = "Russia";
+        String result = test.max(list, comparator);
+    }
+
+    @Test
+    void whenStringComparatorMin() {
+        List<String> list = Arrays.asList("Russia", "UK", "USA", "Cuba");
+        Comparator<String> comparator = Comparator.comparingInt(String::length);
+        String expected = "UK";
+        String result = test.min(list, comparator);
     }
 
 }
