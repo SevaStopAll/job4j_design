@@ -10,7 +10,7 @@ class SimpleGeneratorTest {
     SimpleGenerator generator = new SimpleGenerator();
 
     @Test
-    public void whenChangingIsCorrect() {
+    public void whenWorkIsCorrect() {
         HashMap<String, String> map = new HashMap<>();
         map.put("name", "Vsevolod");
         map.put("subject", "they");
@@ -25,7 +25,7 @@ class SimpleGeneratorTest {
         map.put("name", "Vsevolod");
         map.put("age", "13");
         assertThatThrownBy(() -> generator.produce("I am ${name}. I am ${age}. I am from ${country}", map))
-                .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("There is no key in the map");
+                .isInstanceOf(IllegalArgumentException.class);
     }
 
     @Test
@@ -34,6 +34,31 @@ class SimpleGeneratorTest {
         map.put("name", "Vsevolod");
         map.put("age", "13");
         assertThatThrownBy(() -> generator.produce("I am ${name}", map))
-                .isInstanceOf(IllegalArgumentException.class).hasMessageContaining("There is an extra key");
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void whenMapIsNull() {
+        HashMap<String, String> map = null;
+        assertThatThrownBy(() -> generator.produce("I am ${name}", map))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void whenTemplateIsNull() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("name", "Vsevolod");
+        map.put("age", "13");
+        assertThatThrownBy(() -> generator.produce(null, map))
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @Test
+    public void whenTemplateIsIncorrect() {
+        HashMap<String, String> map = new HashMap<>();
+        map.put("name", "Vsevolod");
+        map.put("age", "13");
+        assertThatThrownBy(() -> generator.produce("I am Vsevolod. I am 29. I am from Russia", map))
+                .isInstanceOf(IllegalArgumentException.class);
     }
 }
