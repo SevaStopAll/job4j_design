@@ -8,9 +8,9 @@ public class InMemoryCurrencyConverter implements CurrencyConverter {
         this.conversationTable[Currency.RUB.ordinal()][Currency.USD.ordinal()] = 0.0162;
         this.conversationTable[Currency.RUB.ordinal()][Currency.EUR.ordinal()] = 0.0166;
         this.conversationTable[Currency.USD.ordinal()][Currency.EUR.ordinal()] = 1.0218;
-        this.conversationTable[Currency.USD.ordinal()][Currency.RUB.ordinal()] = 65D;
+        this.conversationTable[Currency.USD.ordinal()][Currency.RUB.ordinal()] = 74D;
         this.conversationTable[Currency.EUR.ordinal()][Currency.USD.ordinal()] = 0.9786;
-        this.conversationTable[Currency.EUR.ordinal()][Currency.RUB.ordinal()] = 63D;
+        this.conversationTable[Currency.EUR.ordinal()][Currency.RUB.ordinal()] = 67D;
     }
 
     @Override
