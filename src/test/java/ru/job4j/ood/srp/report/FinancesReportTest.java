@@ -29,7 +29,7 @@ class FinancesReportTest {
                 .append(worker.getName()).append(" ")
                 .append(parser.parse(worker.getHired())).append(" ")
                 .append(parser.parse(worker.getFired())).append(" ")
-                .append(converter.convert(Currency.USD,worker.getSalary(), Currency.RUB))
+                .append(converter.convert(Currency.USD, worker.getSalary(), Currency.RUB))
                 .append(System.lineSeparator());
         assertThat(engine.generate(em -> true)).isEqualTo(expect.toString());
     }
