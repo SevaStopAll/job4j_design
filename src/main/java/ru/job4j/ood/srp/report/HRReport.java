@@ -4,13 +4,10 @@ import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.Store;
 
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.Comparator;
+import java.util.*;
 import java.util.function.Predicate;
 
-public class HRReport implements Report{
+public class HRReport implements Report {
 
     private final Store store;
     private final DateTimeParser<Calendar> dateTimeParser;
@@ -23,11 +20,12 @@ public class HRReport implements Report{
     @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
-        Comparator<Employee> comparator = (o1, o2) -> Double.compare(o2.getSalary(), o1.getSalary());
+        Comparator<Employee> comparator = Comparator.comparingDouble(Employee::getSalary).reversed();
         text.append("Name; Salary;")
                 .append(System.lineSeparator());
-        Collections.sort(store.findBy(filter), comparator);
-        for (Employee employee : store.findBy(filter)) {
+        List<Employee> list = store.findBy(filter);
+        list.sort(comparator);
+        for (Employee employee : list) {
             text.append(employee.getName()).append(" ")
                     .append(employee.getSalary())
                     .append(System.lineSeparator());

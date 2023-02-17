@@ -13,7 +13,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ITReportTest {
 
     @Test
-    public void whenOldGenerated() {
+    public void whenGeneratedCorrectly() {
         MemStore store = new MemStore();
         Calendar now = Calendar.getInstance();
         Employee worker = new Employee("Ivan", now, now, 100);

@@ -9,7 +9,7 @@ import ru.job4j.ood.srp.store.Store;
 import java.util.Calendar;
 import java.util.function.Predicate;
 
-public class FinancesReport implements Report{
+public class FinancesReport implements Report {
     private final Store store;
     private final DateTimeParser<Calendar> dateTimeParser;
 
@@ -31,6 +31,76 @@ public class FinancesReport implements Report{
                     .append(dateTimeParser.parse(employee.getHired())).append(" ")
                     .append(dateTimeParser.parse(employee.getFired())).append(" ")
                     .append(converter.convert(Currency.USD, employee.getSalary(), Currency.RUB))
+                    .append(System.lineSeparator());
+        }
+        return text.toString();
+    }
+
+    public String generateRubUsd(Predicate<Employee> filter) {
+        StringBuilder text = new StringBuilder();
+        text.append("Name; Hired; Fired; Salary;")
+                .append(System.lineSeparator());
+        for (Employee employee : store.findBy(filter)) {
+            text.append(employee.getName()).append(" ")
+                    .append(dateTimeParser.parse(employee.getHired())).append(" ")
+                    .append(dateTimeParser.parse(employee.getFired())).append(" ")
+                    .append(converter.convert(Currency.RUB, employee.getSalary(), Currency.USD))
+                    .append(System.lineSeparator());
+        }
+        return text.toString();
+    }
+
+    public String generateRuEur(Predicate<Employee> filter) {
+        StringBuilder text = new StringBuilder();
+        text.append("Name; Hired; Fired; Salary;")
+                .append(System.lineSeparator());
+        for (Employee employee : store.findBy(filter)) {
+            text.append(employee.getName()).append(" ")
+                    .append(dateTimeParser.parse(employee.getHired())).append(" ")
+                    .append(dateTimeParser.parse(employee.getFired())).append(" ")
+                    .append(converter.convert(Currency.RUB, employee.getSalary(), Currency.EUR))
+                    .append(System.lineSeparator());
+        }
+        return text.toString();
+    }
+
+    public String generateEurRu(Predicate<Employee> filter) {
+        StringBuilder text = new StringBuilder();
+        text.append("Name; Hired; Fired; Salary;")
+                .append(System.lineSeparator());
+        for (Employee employee : store.findBy(filter)) {
+            text.append(employee.getName()).append(" ")
+                    .append(dateTimeParser.parse(employee.getHired())).append(" ")
+                    .append(dateTimeParser.parse(employee.getFired())).append(" ")
+                    .append(converter.convert(Currency.EUR, employee.getSalary(), Currency.RUB))
+                    .append(System.lineSeparator());
+        }
+        return text.toString();
+    }
+
+    public String generateUsdEur(Predicate<Employee> filter) {
+        StringBuilder text = new StringBuilder();
+        text.append("Name; Hired; Fired; Salary;")
+                .append(System.lineSeparator());
+        for (Employee employee : store.findBy(filter)) {
+            text.append(employee.getName()).append(" ")
+                    .append(dateTimeParser.parse(employee.getHired())).append(" ")
+                    .append(dateTimeParser.parse(employee.getFired())).append(" ")
+                    .append(converter.convert(Currency.USD, employee.getSalary(), Currency.EUR))
+                    .append(System.lineSeparator());
+        }
+        return text.toString();
+    }
+
+    public String generateEurUsd(Predicate<Employee> filter) {
+        StringBuilder text = new StringBuilder();
+        text.append("Name; Hired; Fired; Salary;")
+                .append(System.lineSeparator());
+        for (Employee employee : store.findBy(filter)) {
+            text.append(employee.getName()).append(" ")
+                    .append(dateTimeParser.parse(employee.getHired())).append(" ")
+                    .append(dateTimeParser.parse(employee.getFired())).append(" ")
+                    .append(converter.convert(Currency.EUR, employee.getSalary(), Currency.USD))
                     .append(System.lineSeparator());
         }
         return text.toString();
