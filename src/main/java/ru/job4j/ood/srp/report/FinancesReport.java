@@ -1,6 +1,7 @@
 package ru.job4j.ood.srp.report;
 
 import ru.job4j.ood.srp.currency.Currency;
+import ru.job4j.ood.srp.currency.CurrencyConverter;
 import ru.job4j.ood.srp.currency.InMemoryCurrencyConverter;
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
@@ -13,12 +14,17 @@ public class FinancesReport implements Report {
     private final Store store;
     private final DateTimeParser<Calendar> dateTimeParser;
 
-    private final InMemoryCurrencyConverter converter;
+    private final CurrencyConverter converter;
 
-    public FinancesReport(Store store, DateTimeParser<Calendar> dateTimeParser, InMemoryCurrencyConverter converter) {
+    private Currency convertFrom;
+    private Currency convertTo;
+
+    public FinancesReport(Store store, DateTimeParser<Calendar> dateTimeParser, CurrencyConverter converter, Currency convertFrom, Currency convertTo) {
         this.store = store;
         this.dateTimeParser = dateTimeParser;
         this.converter = converter;
+        this.convertFrom = convertFrom;
+        this.convertTo = convertTo;
     }
 
     @Override
@@ -30,7 +36,7 @@ public class FinancesReport implements Report {
             text.append(employee.getName()).append(" ")
                     .append(dateTimeParser.parse(employee.getHired())).append(" ")
                     .append(dateTimeParser.parse(employee.getFired())).append(" ")
-                    .append(converter.convert(Currency.USD, employee.getSalary(), Currency.RUB))
+                    .append(converter.convert(convertFrom, employee.getSalary(), convertTo))
                     .append(System.lineSeparator());
         }
         return text.toString();

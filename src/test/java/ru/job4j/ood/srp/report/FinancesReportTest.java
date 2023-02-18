@@ -22,7 +22,7 @@ class FinancesReportTest {
         DateTimeParser<Calendar> parser = new ReportDateTimeParser();
         InMemoryCurrencyConverter converter = new InMemoryCurrencyConverter();
         store.add(worker);
-        Report engine = new FinancesReport(store, parser, converter);
+        Report engine = new FinancesReport(store, parser, converter, Currency.USD, Currency.RUB);
         StringBuilder expect = new StringBuilder()
                 .append("Name; Hired; Fired; Salary;")
                 .append(System.lineSeparator())
