@@ -8,7 +8,7 @@ import java.util.Calendar;
 import java.util.function.Predicate;
 
 
-public class XmlReport implements Report{
+public class XmlReport implements Report {
 
 
     private final Store store;
@@ -21,10 +21,10 @@ public class XmlReport implements Report{
 
     @Override
     public String generate(Predicate<Employee> filter) {
-        String result = null;
+        /*String result = null;
         for (Employee employee : store.findBy(filter)) {
-        }
-        return result;
+        }*/
+        return null;
     }
 
         /*StringBuilder text = new StringBuilder();

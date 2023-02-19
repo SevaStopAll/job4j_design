@@ -11,7 +11,7 @@ import java.util.function.Predicate;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
-public class JsonReport implements Report{
+public class JsonReport implements Report {
 
     final Gson gson;
     private final Store store;
