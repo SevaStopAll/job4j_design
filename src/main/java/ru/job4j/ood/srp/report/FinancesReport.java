@@ -13,9 +13,7 @@ import java.util.function.Predicate;
 public class FinancesReport implements Report {
     private final Store store;
     private final DateTimeParser<Calendar> dateTimeParser;
-
     private final CurrencyConverter converter;
-
     private Currency convertFrom;
     private Currency convertTo;
 
