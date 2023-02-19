@@ -2,7 +2,6 @@ package ru.job4j.ood.srp.report;
 
 import ru.job4j.ood.srp.currency.Currency;
 import ru.job4j.ood.srp.currency.CurrencyConverter;
-import ru.job4j.ood.srp.currency.InMemoryCurrencyConverter;
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.model.Employee;
 import ru.job4j.ood.srp.store.Store;
