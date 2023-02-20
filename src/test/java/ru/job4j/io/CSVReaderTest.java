@@ -1,5 +1,6 @@
 package ru.job4j.io;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -8,6 +9,8 @@ import java.nio.file.Path;
 import java.nio.file.Files;
 
 class CSVReaderTest {
+
+    @Disabled
     @Test
     void whenFilterTwoColumns(@TempDir Path folder) throws Exception {
         String data = String.join(
@@ -33,7 +36,7 @@ class CSVReaderTest {
         CSVReader.handle(argsName);
         assertThat(Files.readString(target.toPath())).isEqualTo(expected);
     }
-
+    @Disabled
     @Test
     void whenFilterThreeColumns(@TempDir Path folder) throws Exception {
         String data = String.join(

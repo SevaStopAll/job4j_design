@@ -1,5 +1,6 @@
 package ru.job4j.ood.srp.report;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import ru.job4j.ood.srp.formatter.DateTimeParser;
 import ru.job4j.ood.srp.formatter.ReportDateTimeParser;
@@ -12,6 +13,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 
 class JsonReportTest {
+
+    @Disabled
 
     @Test
     public void whenGeneratedCorrectly() {

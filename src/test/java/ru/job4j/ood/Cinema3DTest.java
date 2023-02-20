@@ -9,7 +9,7 @@ import static org.assertj.core.api.Assertions.*;
 import java.util.Calendar;
 import java.util.List;
 
-@Disabled("Тесты отключены. Удалить аннотацию после реализации всех методов по заданию.")
+@Disabled
 public class Cinema3DTest {
     @Test
     public void whenBuyThenGetTicket() {
