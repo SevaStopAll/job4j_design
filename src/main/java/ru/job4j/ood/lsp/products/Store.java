@@ -1,12 +1,12 @@
 package ru.job4j.ood.lsp.products;
 
 import java.util.List;
-import java.util.function.Predicate;
 
 public interface Store {
-     void put(Food food, Predicate<Food> filter);
 
-     List<Food> get(Store store);
+     List<Food> get();
 
-     void put(Food food);
+     boolean put(Food food);
+
+     double getShelfLife();
 }
