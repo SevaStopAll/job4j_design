@@ -11,7 +11,7 @@ public class ControlQuality {
         this.storages = new TreeSet<>(comparator);
     }
 
-    public void addStorage(Store store){
+    public void addStorage(Store store) {
         storages.add(store);
     }
 
