@@ -22,7 +22,6 @@ public class FinancesReport implements Report {
         this.convertFrom = convertFrom;
         this.convertTo = convertTo;
     }
-
     @Override
     public String generate(Predicate<Employee> filter) {
         StringBuilder text = new StringBuilder();
