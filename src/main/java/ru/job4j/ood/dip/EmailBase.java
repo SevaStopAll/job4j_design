@@ -26,4 +26,6 @@ public class EmailBase {
     }
 }
 
-class Email {}
+class Email {
+
+}
