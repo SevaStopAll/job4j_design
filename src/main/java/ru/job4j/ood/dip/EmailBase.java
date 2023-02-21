@@ -4,12 +4,10 @@ import java.util.HashSet;
 
 public class EmailBase {
     private HashSet<Email> emails;
-
     public boolean add() {
 
         return false;
     }
-
     public Email get() {
 
         return null;
@@ -25,7 +23,6 @@ public class EmailBase {
         return false;
     }
 }
-
 class Email {
 
 }

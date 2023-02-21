@@ -10,7 +10,6 @@ public class Mall {
         this.groceries = new ArrayList<>();
         groceries.add(grocery);
     }
-
 }
 
 class Grocery {

@@ -37,7 +37,7 @@ class ControlQualityTest {
     @Test
     void whenPutInStoreAndDiscount() {
         Food apple = new Food("Apple",
-                LocalDate.of(2023, 02, 13), LocalDate.of(2023, 02, 21), 100.0);
+                LocalDate.of(2023, 02, 14), LocalDate.of(2023, 02, 22), 100.0);
         quality.send(apple);
         double expected = 50.00;
         double result = shop.get().get(0).getPrice();
@@ -47,7 +47,7 @@ class ControlQualityTest {
     @Test
     void whenPutInTrash() {
         Food apple = new Food("Apple",
-                LocalDate.of(2023, 02, 17), LocalDate.of(2023, 02, 18), 100.0);
+                LocalDate.of(2023, 02, 18), LocalDate.of(2023, 02, 19), 100.0);
         assertThat(quality.send(apple)).isTrue();
     }
 
