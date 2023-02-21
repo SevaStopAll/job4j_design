@@ -10,6 +10,10 @@ public class Mall {
         this.groceries = new ArrayList<>();
         groceries.add(grocery);
     }
+
+    public List<Grocery> getGroceries() {
+        return groceries;
+    }
 }
 
 class Grocery {
