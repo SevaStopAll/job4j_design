@@ -6,7 +6,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.*;
 
-class WarehouseTest {
+public class WarehouseTest {
     Warehouse warehouse = new Warehouse();
 
     @Test

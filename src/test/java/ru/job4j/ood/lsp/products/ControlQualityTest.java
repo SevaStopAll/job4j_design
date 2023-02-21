@@ -7,7 +7,7 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.*;
 
-class ControlQualityTest {
+public class ControlQualityTest {
     ControlQuality quality = new ControlQuality();
     Shop shop = new Shop();
     Trash trash = new Trash();
