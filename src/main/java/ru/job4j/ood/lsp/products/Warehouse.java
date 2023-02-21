@@ -16,9 +16,4 @@ public class Warehouse extends AbstractStore {
         }
         return result;
     }
-
-    @Override
-    public double getShelfLife() {
-        return SHELFLIFE;
-    }
 }

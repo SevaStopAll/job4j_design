@@ -23,11 +23,15 @@ public class Food {
         this.price = price - (price * discount);
     }
 
-    public double getFreshness() {
-        return (double) ChronoUnit.DAYS.between(LocalDate.now(), createDate) / (ChronoUnit.DAYS.between(expiryDate, createDate)) * 100;
-    }
-
     public double getPrice() {
         return price;
+    }
+
+    public LocalDate getExpiryDate() {
+        return expiryDate;
+    }
+
+    public LocalDate getCreateDate() {
+        return createDate;
     }
 }

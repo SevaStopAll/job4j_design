@@ -26,6 +26,15 @@ public class Parking {
 
     private boolean checkPlace(Auto auto) {
         boolean result = false;
+        if (auto.isTruck() && freeTruckPlaces > 0) {
+            result = true;
+        }
+        else if (auto.isTruck() && freeCarPlaces > 2) {
+            result = true;
+        }
+        else if (!auto.isTruck() && freeCarPlaces > 0) {
+            result = true;
+        }
         return result;
     }
 }

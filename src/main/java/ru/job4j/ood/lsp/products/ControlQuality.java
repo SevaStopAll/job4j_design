@@ -1,11 +1,13 @@
 package ru.job4j.ood.lsp.products;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.Comparator;
-import java.util.Set;
 import java.util.TreeSet;
 
 public class ControlQuality {
     private TreeSet<Store> storages;
+
     private Comparator<Store> comparator = Comparator.comparingDouble(Store::getShelfLife).reversed();
     public ControlQuality() {
         this.storages = new TreeSet<>(comparator);
@@ -26,3 +28,4 @@ public class ControlQuality {
         return result;
     }
 }
+

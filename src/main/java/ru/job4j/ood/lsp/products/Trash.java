@@ -18,9 +18,4 @@ public class Trash extends AbstractStore {
         }
         return result;
     }
-
-    @Override
-    public double getShelfLife() {
-        return SHELFLIFE;
-    }
 }

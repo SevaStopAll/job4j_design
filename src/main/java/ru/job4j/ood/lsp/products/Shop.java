@@ -22,9 +22,4 @@ public class Shop extends AbstractStore {
         }
         return result;
     }
-
-    @Override
-    public double getShelfLife() {
-        return SHELFLIFE;
-    }
 }
