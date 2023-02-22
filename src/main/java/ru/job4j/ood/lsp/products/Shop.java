@@ -13,11 +13,11 @@ public class Shop extends AbstractStore {
         boolean result = false;
         double date = analyze(food);
         if (date < 75 && date > SHELFLIFE) {
-            products.add(food);
+            add(food);
             result = true;
         } else if (date < SHELFLIFE && date > 0) {
             food.setDiscount(0.5);
-            products.add(food);
+            add(food);
             result = true;
         }
         return result;

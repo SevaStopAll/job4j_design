@@ -14,7 +14,7 @@ public class Trash extends AbstractStore {
         boolean result = false;
         double date = analyze(food);
         if (date <= SHELFLIFE) {
-            products.add(food);
+            add(food);
             result = true;
         }
         return result;

@@ -21,6 +21,9 @@ public abstract class AbstractStore implements Store {
 
     public abstract boolean put(Food food);
 
+     void add(Food food) {
+        products.add(food);
+    }
     public double analyze(Food food) {
         return analyzer.analyze(food);
     }
