@@ -7,9 +7,7 @@ import java.util.List;
 
 public abstract class AbstractStore implements Store {
     List<Food> products;
-    private FreshAnalyser analyzer;
-
-    final static double SHELFLIFE = 0;
+    private final FreshAnalyser analyzer;
 
     public AbstractStore() {
         this.products = new ArrayList<>();
@@ -22,19 +20,16 @@ public abstract class AbstractStore implements Store {
 
     public abstract boolean put(Food food);
 
-    private boolean analyze(Food food) {
-        return analyzer.analize(food, SHELFLIFE);
+    public double analyze(Food food) {
+        return analyzer.analyze(food);
     }
 }
 
 class FreshAnalyser {
-    public boolean analize(Food food, double shelfLife) {
-        boolean result = false;
-        double actualPercent = (double) ChronoUnit.DAYS.between(LocalDate.now(), food.getCreateDate()) / (ChronoUnit.DAYS.between(food.getExpiryDate(), food.getExpiryDate())) * 100;
-        if (actualPercent > shelfLife) {
-            result = true;
-        }
-        return result;
+    public double analyze(Food food) {
+        return (double) ChronoUnit.DAYS.between(LocalDate.now(), food.getCreateDate()) / (ChronoUnit.DAYS.between(food.getExpiryDate(), food.getCreateDate())) * 100;
     }
 }
+
+
 

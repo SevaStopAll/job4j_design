@@ -1,16 +1,12 @@
 package ru.job4j.ood.lsp.products;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.util.Comparator;
-import java.util.TreeSet;
+import java.util.HashSet;
 
 public class ControlQuality {
-    private TreeSet<Store> storages;
+    private HashSet<Store> storages;
 
-    private Comparator<Store> comparator = Comparator.comparingDouble(Store::getShelfLife).reversed();
     public ControlQuality() {
-        this.storages = new TreeSet<>(comparator);
+        this.storages = new HashSet<>();
     }
 
     public void addStorage(Store store) {

@@ -10,7 +10,8 @@ public class Warehouse extends AbstractStore {
     @Override
     public boolean put(Food food) {
         boolean result = false;
-        if (food.getFreshness() > SHELFLIFE) {
+        double date = analyze(food);
+        if (date > SHELFLIFE) {
             products.add(food);
             result = true;
         }

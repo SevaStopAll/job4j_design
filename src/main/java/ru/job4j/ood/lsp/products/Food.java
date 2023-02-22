@@ -1,7 +1,6 @@
 package ru.job4j.ood.lsp.products;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 
 public class Food {
     private String name;
