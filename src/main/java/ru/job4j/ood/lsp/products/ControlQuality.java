@@ -12,7 +12,6 @@ public class ControlQuality {
     public void addStorage(Store store) {
         storages.add(store);
     }
-
     public boolean send(Food food) {
         boolean result = false;
         for (Store store : storages) {

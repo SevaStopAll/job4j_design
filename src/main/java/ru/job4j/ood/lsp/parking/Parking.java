@@ -20,7 +20,6 @@ public class Parking {
     }
 
     public boolean parkCar(Auto auto) {
-
         return false;
     }
 
@@ -28,11 +27,9 @@ public class Parking {
         boolean result = false;
         if (auto.isTruck() && freeTruckPlaces > 0) {
             result = true;
-        }
-        else if (auto.isTruck() && freeCarPlaces > 2) {
+        } else if (auto.isTruck() && freeCarPlaces > 2) {
             result = true;
-        }
-        else if (!auto.isTruck() && freeCarPlaces > 0) {
+        } else if (!auto.isTruck() && freeCarPlaces > 0) {
             result = true;
         }
         return result;
