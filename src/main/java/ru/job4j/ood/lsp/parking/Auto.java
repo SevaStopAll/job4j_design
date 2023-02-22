@@ -1,9 +1,13 @@
 package ru.job4j.ood.lsp.parking;
 
 public abstract class Auto {
-    private boolean isTruck;
+    private final int size;
 
-    public boolean isTruck() {
-        return isTruck;
+    public Auto(int size) {
+        this.size = size;
+    }
+
+    public int getSize() {
+        return size;
     }
 }
