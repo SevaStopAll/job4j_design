@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractStore implements Store {
-    List<Food> products;
+    private final List<Food> products;
     private final FreshAnalyser analyzer;
 
     public AbstractStore() {
@@ -15,7 +15,8 @@ public abstract class AbstractStore implements Store {
     }
 
     public List<Food> get() {
-        return products;
+        List<Food> result = products;
+        return result;
     }
 
     public abstract boolean put(Food food);
