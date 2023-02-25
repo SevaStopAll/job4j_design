@@ -15,8 +15,8 @@ public abstract class AbstractStore implements Store {
     }
 
     public List<Food> get() {
-        List<Food> result = new ArrayList<>(products);
-        return result;
+        List<Food> foodList = new ArrayList<>(products);
+        return foodList;
     }
 
     public abstract boolean put(Food food);

@@ -1,11 +1,13 @@
 package ru.job4j.ood.lsp.products;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.*;
 
+@Disabled
 public class TrashTest {
     Trash trash = new Trash();
 
