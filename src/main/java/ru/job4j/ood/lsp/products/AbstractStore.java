@@ -1,17 +1,15 @@
 package ru.job4j.ood.lsp.products;
 
-import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractStore implements Store {
     private final List<Food> products;
-    private final FreshAnalyser analyzer;
+    private final FreshAnalyzer analyzer;
 
     public AbstractStore() {
         this.products = new ArrayList<>();
-        this.analyzer = new FreshAnalyser();
+        this.analyzer = new FreshAnalyzer();
     }
 
     public List<Food> get() {
@@ -19,20 +17,16 @@ public abstract class AbstractStore implements Store {
         return foodList;
     }
 
-    public abstract boolean put(Food food);
-
-     void add(Food food) {
+    public boolean put(Food food) {
+        boolean result = true;
+        if (!isFresh(food)) {
+            result = false;
+        }
         products.add(food);
+        return result;
     }
-    public double analyze(Food food) {
-        return analyzer.analyze(food);
-    }
-}
 
-class FreshAnalyser {
-    public double analyze(Food food) {
-        return (double) ChronoUnit.DAYS.between(LocalDate.now(), food.getCreateDate()) / (ChronoUnit.DAYS.between(food.getExpiryDate(), food.getCreateDate())) * 100;
-    }
+    protected abstract boolean isFresh(Food food);
 }
 
 
