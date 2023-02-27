@@ -32,5 +32,4 @@ public class SimpleMenuTest {
                 .isEqualTo(menu.select("Покормить собаку").get());
         menu.forEach(i -> System.out.println(i.getNumber() + i.getName()));
     }
-
 }
