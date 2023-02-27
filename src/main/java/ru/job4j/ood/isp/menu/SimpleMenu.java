@@ -9,8 +9,11 @@ public class SimpleMenu implements Menu {
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
         boolean result = false;
-        if (findItem(childName).isEmpty()) {
+        if (findItem(parentName).isEmpty()) {
             rootElements.add(new SimpleMenuItem(childName, actionDelegate));
+            result = true;
+        } else {
+            findItem(parentName).get().menuItem.getChildren().add(new SimpleMenuItem(childName, actionDelegate));
             result = true;
         }
         return result;
