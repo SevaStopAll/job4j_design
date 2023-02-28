@@ -21,7 +21,7 @@ public class SimpleMenu implements Menu {
 
     @Override
     public Optional<MenuItemInfo> select(String itemName) {
-        Optional<MenuItemInfo> result = Optional.empty();;
+        Optional<MenuItemInfo> result = Optional.empty();
         if (findItem(itemName).isPresent()) {
             result = Optional.of(new MenuItemInfo(findItem(itemName).get().menuItem, findItem(itemName).get().number));
         }
@@ -30,7 +30,20 @@ public class SimpleMenu implements Menu {
 
     @Override
     public Iterator<MenuItemInfo> iterator() {
-        return null;
+        return new Iterator<MenuItemInfo>() {
+            DFSIterator dfsIterator = new DFSIterator();
+
+            @Override
+            public boolean hasNext() {
+                return dfsIterator.hasNext();
+            }
+
+            @Override
+            public MenuItemInfo next() {
+                ItemInfo item = dfsIterator.next();
+                return new MenuItemInfo(item.menuItem, item.number);
+            }
+        };
     }
 
     private Optional<ItemInfo> findItem(String name) {
