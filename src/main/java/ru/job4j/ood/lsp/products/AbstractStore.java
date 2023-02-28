@@ -21,8 +21,9 @@ public abstract class AbstractStore implements Store {
         boolean result = true;
         if (!isFresh(food)) {
             result = false;
+        } else {
+            products.add(food);
         }
-        products.add(food);
         return result;
     }
 

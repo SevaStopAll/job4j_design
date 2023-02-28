@@ -26,21 +26,21 @@ public class ControlQualityTest {
     void whenPutInWarehouse() {
         Food apple = new Food("Apple",
                 LocalDate.of(2023, 02, 20), LocalDate.of(2023, 02, 22), 100.0);
-        assertThat(quality.send(apple)).isTrue();
+        assertThat(quality.distribute(apple)).isTrue();
     }
 
     @Test
     void whenPutInShop() {
         Food apple = new Food("Apple",
                 LocalDate.of(2023, 02, 20), LocalDate.of(2023, 02, 22), 100.0);
-        assertThat(quality.send(apple)).isTrue();
+        assertThat(quality.distribute(apple)).isTrue();
     }
 
     @Test
     void whenPutInStoreAndDiscount() {
         Food apple = new Food("Apple",
                 LocalDate.of(2023, 02, 15), LocalDate.of(2023, 02, 23), 100.0);
-        quality.send(apple);
+        quality.distribute(apple);
         double expected = 50.00;
         double result = shop.get().get(0).getPrice();
         assertThat(result).isEqualTo(expected);
@@ -50,7 +50,7 @@ public class ControlQualityTest {
     void whenPutInTrash() {
         Food apple = new Food("Apple",
                 LocalDate.of(2023, 02, 19), LocalDate.of(2023, 02, 20), 100.0);
-        assertThat(quality.send(apple)).isTrue();
+        assertThat(quality.distribute(apple)).isTrue();
     }
 
 }

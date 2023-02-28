@@ -12,7 +12,7 @@ public class ControlQuality {
     public void addStorage(Store store) {
         storages.add(store);
     }
-    public boolean send(Food food) {
+    public boolean distribute(Food food) {
         boolean result = false;
         for (Store store : storages) {
             if (store.put(food)) {
