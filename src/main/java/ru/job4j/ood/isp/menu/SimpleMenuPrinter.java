@@ -6,11 +6,11 @@ public class SimpleMenuPrinter implements MenuPrinter {
     public void print(Menu menu) {
         menu.forEach(i -> {
             String number = i.getNumber();
-            String repeated = "----".repeat(i.getNumber().length() / 2 - 1);
             if (number.length() == 2) {
-                System.out.println(i.getName() + divider + number);
+                System.out.printf("%s%s%s%s", number, divider, i.getName(), System.lineSeparator());
             } else {
-                System.out.println(repeated + divider + i.getName() + divider + number);
+                String repeated = "----".repeat(i.getNumber().length() / 2 - 1);
+                System.out.printf("%s%s%s%s%s%s", repeated, divider, number, divider, i.getName(), System.lineSeparator());
             }
         });
     }
