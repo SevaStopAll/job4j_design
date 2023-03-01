@@ -1,6 +1,6 @@
 package ru.job4j.ood.isp.menu;
 
-public class SimpleMenuPrinter implements MenuPrinter {
+public class ConsoleMenuPrinter implements MenuPrinter {
     private final String divider = " ";
     @Override
     public void print(Menu menu) {
@@ -23,7 +23,7 @@ public class SimpleMenuPrinter implements MenuPrinter {
         menu.add("Сходить в магазин", "Купить продукты", STUB_ACTION);
         menu.add("Купить продукты", "Купить хлеб", STUB_ACTION);
         menu.add("Купить продукты", "Купить молоко", STUB_ACTION);
-        SimpleMenuPrinter printer = new SimpleMenuPrinter();
+        MenuPrinter printer = new ConsoleMenuPrinter();
         printer.print(menu);
     }
 }
