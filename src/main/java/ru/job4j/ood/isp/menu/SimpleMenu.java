@@ -1,5 +1,9 @@
 package ru.job4j.ood.isp.menu;
 
+import ru.job4j.ood.isp.menu.models.ActionDelegate;
+import ru.job4j.ood.isp.menu.models.Menu;
+import ru.job4j.ood.isp.menu.models.MenuItem;
+
 import java.util.*;
 
 public class SimpleMenu implements Menu {

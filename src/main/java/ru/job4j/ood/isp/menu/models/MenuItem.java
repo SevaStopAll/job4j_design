@@ -1,4 +1,4 @@
-package ru.job4j.ood.isp.menu;
+package ru.job4j.ood.isp.menu.models;
 
 import java.util.List;
 

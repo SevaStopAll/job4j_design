@@ -1,4 +1,8 @@
-package ru.job4j.ood.isp.menu;
+package ru.job4j.ood.isp.menu.print;
+
+import ru.job4j.ood.isp.menu.models.ActionDelegate;
+import ru.job4j.ood.isp.menu.models.Menu;
+import ru.job4j.ood.isp.menu.SimpleMenu;
 
 import java.util.ArrayList;
 import java.util.List;

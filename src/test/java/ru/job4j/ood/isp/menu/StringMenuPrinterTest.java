@@ -2,10 +2,11 @@ package ru.job4j.ood.isp.menu;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import ru.job4j.ood.isp.menu.models.ActionDelegate;
+import ru.job4j.ood.isp.menu.models.Menu;
+import ru.job4j.ood.isp.menu.print.StringMenuPrinter;
 
 import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @Disabled
 class StringMenuPrinterTest {
