@@ -64,7 +64,6 @@ public class SimpleMenu implements Menu {
     }
 
     private static class SimpleMenuItem implements MenuItem {
-
         private String name;
         private List<MenuItem> children = new ArrayList<>();
         private ActionDelegate actionDelegate;
