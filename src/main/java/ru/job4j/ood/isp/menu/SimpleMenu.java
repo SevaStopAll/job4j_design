@@ -13,6 +13,9 @@ public class SimpleMenu implements Menu {
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
         boolean result = false;
+        if (findItem(childName).isPresent()) {
+            return false;
+        }
         if (findItem(parentName).isEmpty()) {
             rootElements.add(new SimpleMenuItem(childName, actionDelegate));
             result = true;
@@ -30,6 +33,10 @@ public class SimpleMenu implements Menu {
             result = Optional.of(new MenuItemInfo(findItem(itemName).get().menuItem, findItem(itemName).get().number));
         }
         return result;
+
+/*        2. Метод select() нужно упростить до вида:
+
+        return findItem(...).map(...);*/
     }
 
     @Override
