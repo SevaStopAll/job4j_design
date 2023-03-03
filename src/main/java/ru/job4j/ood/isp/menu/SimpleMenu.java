@@ -18,7 +18,7 @@ public class SimpleMenu implements Menu {
             return false;
         }
         if (parentName == ROOT) {
-            rootElements.add(new SimpleMenuItem(childName, actionDelegate));
+            rootElements.add(new SimpleMenuItem(childName, new ArrayList<>()));
             return true;
         }
         if (parent.isEmpty()) {
@@ -39,7 +39,7 @@ public class SimpleMenu implements Menu {
 
     @Override
     public Iterator<MenuItemInfo> iterator() {
-        return new Iterator<MenuItemInfo>() {
+        return new Iterator<>() {
             DFSIterator dfsIterator = new DFSIterator();
 
             @Override
@@ -76,6 +76,11 @@ public class SimpleMenu implements Menu {
         public SimpleMenuItem(String name, ActionDelegate actionDelegate) {
             this.name = name;
             this.actionDelegate = actionDelegate;
+        }
+
+        public SimpleMenuItem(String name, ArrayList<MenuItem> children) {
+            this.name = name;
+            this.children = children;
         }
 
         @Override
