@@ -13,14 +13,19 @@ public class SimpleMenu implements Menu {
     @Override
     public boolean add(String parentName, String childName, ActionDelegate actionDelegate) {
         boolean result = false;
+        Optional<ItemInfo> parent = findItem(parentName);
         if (findItem(childName).isPresent()) {
             return false;
         }
-        if (findItem(parentName).isEmpty()) {
+        if (parentName == ROOT) {
+            rootElements.add(new SimpleMenuItem(childName, actionDelegate));
+            return true;
+        }
+        if (parent.isEmpty()) {
             rootElements.add(new SimpleMenuItem(childName, actionDelegate));
             result = true;
         } else {
-            findItem(parentName).get().menuItem.getChildren().add(new SimpleMenuItem(childName, actionDelegate));
+            parent.get().menuItem.getChildren().add(new SimpleMenuItem(childName, actionDelegate));
             result = true;
         }
         return result;
@@ -123,7 +128,6 @@ public class SimpleMenu implements Menu {
             }
             return new ItemInfo(current, lastNumber);
         }
-
     }
 
     private class ItemInfo {
