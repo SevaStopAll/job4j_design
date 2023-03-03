@@ -28,15 +28,8 @@ public class SimpleMenu implements Menu {
 
     @Override
     public Optional<MenuItemInfo> select(String itemName) {
-        Optional<MenuItemInfo> result = Optional.empty();
-        if (findItem(itemName).isPresent()) {
-            result = Optional.of(new MenuItemInfo(findItem(itemName).get().menuItem, findItem(itemName).get().number));
-        }
-        return result;
-
-/*        2. Метод select() нужно упростить до вида:
-
-        return findItem(...).map(...);*/
+        return findItem(itemName)
+                .map(item -> new MenuItemInfo(item.menuItem, item.number));
     }
 
     @Override
