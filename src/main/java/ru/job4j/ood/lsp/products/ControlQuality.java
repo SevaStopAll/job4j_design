@@ -22,5 +22,9 @@ public class ControlQuality {
         }
         return result;
     }
+
+    public void resort() {
+        storages.forEach(a -> a.get().forEach(this::distribute));
+    }
 }
 

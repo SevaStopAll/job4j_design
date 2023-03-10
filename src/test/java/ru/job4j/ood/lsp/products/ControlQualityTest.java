@@ -8,7 +8,6 @@ import java.time.LocalDate;
 
 import static org.assertj.core.api.Assertions.*;
 
-@Disabled
 public class ControlQualityTest {
     ControlQuality quality = new ControlQuality();
     Shop shop = new Shop();
@@ -25,21 +24,21 @@ public class ControlQualityTest {
     @Test
     void whenPutInWarehouse() {
         Food apple = new Food("Apple",
-                LocalDate.of(2023, 02, 20), LocalDate.of(2023, 02, 22), 100.0);
+                LocalDate.of(2023, 02, 20), LocalDate.of(2025, 02, 22), 100.0);
         assertThat(quality.distribute(apple)).isTrue();
     }
 
     @Test
     void whenPutInShop() {
         Food apple = new Food("Apple",
-                LocalDate.of(2023, 02, 20), LocalDate.of(2023, 02, 22), 100.0);
+                LocalDate.of(2023, 02, 20), LocalDate.of(2023, 10, 22), 100.0);
         assertThat(quality.distribute(apple)).isTrue();
     }
 
     @Test
     void whenPutInStoreAndDiscount() {
         Food apple = new Food("Apple",
-                LocalDate.of(2023, 02, 15), LocalDate.of(2023, 02, 23), 100.0);
+                LocalDate.of(2023, 02, 15), LocalDate.of(2023, 3, 14), 100.0);
         quality.distribute(apple);
         double expected = 50.00;
         double result = shop.get().get(0).getPrice();
